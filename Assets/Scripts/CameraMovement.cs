@@ -4,64 +4,67 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    public float panSpeed = 20f;  // Speed of the camera panning
-    public float zoomSpeed = 5f;  // Speed of the camera zooming
-    public float minZoom = 5f;    // Minimum zoom level
-    public float maxZoom = 20f;   // Maximum zoom level
+    public float panSpeed = 20f;
+    public float zoomSpeed = 2f;
+    public float minZoom = 5f;
+    public float maxZoom = 20f;
 
-    public Vector2 panLimitMin;  // Minimum pan limits (x, y)
-    public Vector2 panLimitMax;  // Maximum pan limits (x, y)
+    // Define the maximum bounds within which the camera can move
+    public float fixedMinX = -10f, fixedMaxX = 10f, fixedMinY = -10f, fixedMaxY = 10f;
 
     private Camera cam;
 
     void Start()
     {
         cam = Camera.main;
-        cam.orthographic = true;  // Ensure the camera is orthographic
     }
 
     void Update()
     {
-        HandleMovement();
+        HandlePan();
         HandleZoom();
     }
 
-    void HandleMovement()
+    void HandlePan()
     {
-        Vector3 pos = transform.position;
+        Vector3 position = transform.position;
 
         if (Input.GetKey("w") || Input.GetKey(KeyCode.UpArrow))
         {
-            pos.y += panSpeed * Time.deltaTime;
+            position.y += panSpeed * Time.deltaTime;
         }
         if (Input.GetKey("s") || Input.GetKey(KeyCode.DownArrow))
         {
-            pos.y -= panSpeed * Time.deltaTime;
+            position.y -= panSpeed * Time.deltaTime;
         }
         if (Input.GetKey("a") || Input.GetKey(KeyCode.LeftArrow))
         {
-            pos.x -= panSpeed * Time.deltaTime;
+            position.x -= panSpeed * Time.deltaTime;
         }
         if (Input.GetKey("d") || Input.GetKey(KeyCode.RightArrow))
         {
-            pos.x += panSpeed * Time.deltaTime;
+            position.x += panSpeed * Time.deltaTime;
         }
 
-        // Clamp the position to the pan limits
-        pos.x = Mathf.Clamp(pos.x, panLimitMin.x, panLimitMax.x);
-        pos.y = Mathf.Clamp(pos.y, panLimitMin.y, panLimitMax.y);
+        // Calculate effective bounds based on the current zoom level
+        float zoomFactor = (cam.orthographicSize - minZoom) / (maxZoom - minZoom);
 
-        transform.position = pos;
+        float minX = Mathf.Lerp(fixedMinX, fixedMinX - cam.aspect * cam.orthographicSize, 1 - zoomFactor);
+        float maxX = Mathf.Lerp(fixedMaxX, fixedMaxX + cam.aspect * cam.orthographicSize, 1 - zoomFactor);
+        float minY = Mathf.Lerp(fixedMinY, fixedMinY - cam.orthographicSize, 1 - zoomFactor);
+        float maxY = Mathf.Lerp(fixedMaxY, fixedMaxY + cam.orthographicSize, 1 - zoomFactor);
+
+        // Clamp the camera position to the effective bounds
+        position.x = Mathf.Clamp(position.x, minX, maxX);
+        position.y = Mathf.Clamp(position.y, minY, maxY);
+
+        transform.position = position;
     }
 
     void HandleZoom()
     {
         float scroll = Input.GetAxis("Mouse ScrollWheel");
-
-        if (scroll != 0.0f)
-        {
-            cam.orthographicSize -= scroll * zoomSpeed;
-            cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, minZoom, maxZoom);
-        }
+        cam.orthographicSize -= scroll * zoomSpeed;
+        cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, minZoom, maxZoom);
     }
 }
