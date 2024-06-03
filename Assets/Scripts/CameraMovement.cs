@@ -52,7 +52,7 @@ public class CameraMovement : MonoBehaviour
         float minX = Mathf.Lerp(fixedMinX, fixedMinX - cam.aspect * cam.orthographicSize, 1 - zoomFactor);
         float maxX = Mathf.Lerp(fixedMaxX, fixedMaxX + cam.aspect * cam.orthographicSize, 1 - zoomFactor);
         float minY = Mathf.Lerp(fixedMinY, fixedMinY - cam.orthographicSize, 1 - zoomFactor);
-        float maxY = Mathf.Lerp(fixedMaxY, fixedMaxY + cam.orthographicSize, 1 - zoomFactor);
+        float maxY = Mathf.Lerp(fixedMaxY, fixedMaxY + cam.orthographicSize, 0 - zoomFactor);
 
         // Clamp the camera position to the effective bounds
         position.x = Mathf.Clamp(position.x, minX, maxX);

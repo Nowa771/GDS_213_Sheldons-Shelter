@@ -1,12 +1,26 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BuildingPlacement : MonoBehaviour
 {
-    public GameObject buildingPrefab;
+    public List<GameObject> buildingPrefabs;
     public GridSystem gridSystem;
+    public GameObject selectionPanel;
 
     private GameObject buildingPreview;
     private bool buildMode = false;
+    private GameObject selectedBuildingPrefab;
+
+    void Start()
+    {
+        selectionPanel.SetActive(false);
+        if (buildingPrefabs.Count > 0)
+        {
+            selectedBuildingPrefab = buildingPrefabs[0];
+        }
+    }
 
     void Update()
     {
@@ -24,6 +38,9 @@ public class BuildingPlacement : MonoBehaviour
     void ToggleBuildMode()
     {
         buildMode = !buildMode;
+        selectionPanel.SetActive(buildMode);
+        Time.timeScale = buildMode ? 0 : 1;
+
         if (buildMode)
         {
             StartPlacingBuilding();
@@ -39,8 +56,11 @@ public class BuildingPlacement : MonoBehaviour
 
     void StartPlacingBuilding()
     {
-        buildingPreview = Instantiate(buildingPrefab);
-        buildingPreview.SetActive(false); // Disable initially to prevent it from blocking raycasts
+        if (selectedBuildingPrefab != null)
+        {
+            buildingPreview = Instantiate(selectedBuildingPrefab);
+            buildingPreview.SetActive(false);
+        }
     }
 
     void UpdateBuildingPlacement()
@@ -63,12 +83,12 @@ public class BuildingPlacement : MonoBehaviour
 
         if (gridSystem.IsCellAvailable(x, y))
         {
-            buildingPreview.SetActive(true); // Enable building preview if it's in a valid position
+            buildingPreview.SetActive(true);
             buildingPreview.transform.position = gridSystem.GetCellCenter(x, y);
         }
         else
         {
-            buildingPreview.SetActive(false); // Disable building preview if it's in an invalid position
+            buildingPreview.SetActive(false);
         }
     }
 
@@ -80,13 +100,10 @@ public class BuildingPlacement : MonoBehaviour
 
         if (gridSystem.IsCellAvailable(x, y))
         {
-            // Define the rotation you want for the prefab
-            Quaternion rotation = Quaternion.Euler(0, -90, 0); // Example rotation (90 degrees around Y axis)
+            Quaternion rotation = Quaternion.Euler(0, -90, 0);
 
-            // Instantiate the prefab with the specified rotation
-            GameObject newBuilding = Instantiate(buildingPrefab, gridSystem.GetCellCenter(x, y), rotation);
+            GameObject newBuilding = Instantiate(selectedBuildingPrefab, gridSystem.GetCellCenter(x, y), rotation);
 
-            // Occupy the grid cell and destroy the building preview
             gridSystem.OccupyCell(x, y);
             Destroy(buildingPreview);
         }
@@ -107,5 +124,20 @@ public class BuildingPlacement : MonoBehaviour
         Vector3 localPosition = gridSystem.transform.InverseTransformPoint(worldPosition);
         x = Mathf.FloorToInt(localPosition.x / gridSystem.cellSize);
         y = Mathf.FloorToInt(localPosition.z / gridSystem.cellSize);
+    }
+
+    public void SelectBuilding(int index)
+    {
+        if (index >= 0 && index < buildingPrefabs.Count)
+        {
+            selectedBuildingPrefab = buildingPrefabs[index];
+            if (buildingPreview != null)
+            {
+                Destroy(buildingPreview);
+                StartPlacingBuilding();
+            }
+            selectionPanel.SetActive(false);
+            Time.timeScale = 1;
+        }
     }
 }
