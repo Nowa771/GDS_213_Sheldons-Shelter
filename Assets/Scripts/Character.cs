@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    public string characterName;
     public float hunger;
     public float thirst;
     public float hungerDecayRate = 1f;
