@@ -6,12 +6,14 @@ using UnityEngine.UI;
 public class BuildingPlacement : MonoBehaviour
 {
     public List<GameObject> buildingPrefabs;
+    public List<int> buildingCosts; // List of material costs for each building
     public GridSystem gridSystem;
     public GameObject selectionPanel;
 
     private GameObject buildingPreview;
     private bool buildMode = false;
     private GameObject selectedBuildingPrefab;
+    private int selectedBuildingCost;
 
     void Start()
     {
@@ -19,6 +21,7 @@ public class BuildingPlacement : MonoBehaviour
         if (buildingPrefabs.Count > 0)
         {
             selectedBuildingPrefab = buildingPrefabs[0];
+            selectedBuildingCost = buildingCosts[0];
         }
     }
 
@@ -98,14 +101,20 @@ public class BuildingPlacement : MonoBehaviour
         int x, y;
         GetGridPosition(mousePosition, out x, out y);
 
-        if (gridSystem.IsCellAvailable(x, y))
+        if (gridSystem.IsCellAvailable(x, y) && Inventory.Instance.HasMaterials(selectedBuildingCost))
         {
             Quaternion rotation = Quaternion.Euler(0, -90, 0);
 
             GameObject newBuilding = Instantiate(selectedBuildingPrefab, gridSystem.GetCellCenter(x, y), rotation);
 
             gridSystem.OccupyCell(x, y);
+            Inventory.Instance.RemoveMaterials(selectedBuildingCost); // Deduct materials
             Destroy(buildingPreview);
+        }
+        else
+        {
+            // Optionally, provide feedback that the player does not have enough materials
+            Debug.Log("Not enough materials to place the building.");
         }
     }
 
@@ -131,6 +140,7 @@ public class BuildingPlacement : MonoBehaviour
         if (index >= 0 && index < buildingPrefabs.Count)
         {
             selectedBuildingPrefab = buildingPrefabs[index];
+            selectedBuildingCost = buildingCosts[index]; // Update the cost for the selected building
             if (buildingPreview != null)
             {
                 Destroy(buildingPreview);

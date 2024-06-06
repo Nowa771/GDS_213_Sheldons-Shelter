@@ -363,6 +363,7 @@ MonoBehaviour:
   buildingPrefabs:
   - {fileID: 8221014866900320784, guid: 4c795a0ed06a537428f3bd012de9bfa7, type: 3}
   - {fileID: 7276208436029529395, guid: 0894c44700c3ace429cd365fbd1aede0, type: 3}
+  buildingCosts: 0500000005000000
   gridSystem: {fileID: 542862604}
   selectionPanel: {fileID: 1939043749}
 --- !u!4 &130311755
@@ -715,9 +716,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   expeditionTime: 10
-  foodGained: 5
-  waterGained: 3
-  materialsGained: 2
+  foodGained: 3
+  waterGained: 4
+  materialsGained: 5
 --- !u!4 &538768778
 Transform:
   m_ObjectHideFlags: 0
@@ -1904,7 +1905,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodCount: 10
   waterCount: 10
-  materialCount: 0
+  materialCount: 5
   foodText: {fileID: 139113919}
   waterText: {fileID: 1882043007}
   materialText: {fileID: 1676802596}
