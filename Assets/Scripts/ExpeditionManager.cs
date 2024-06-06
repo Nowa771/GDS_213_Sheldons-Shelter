@@ -50,12 +50,7 @@ public class ExpeditionManager : MonoBehaviour
 
         Debug.Log("Expedition completed!");
 
-        // Calculate the gained resources
-        int foodGained = Inventory.Instance.foodCount - originalFoodCount;
-        int waterGained = Inventory.Instance.waterCount - originalWaterCount;
-        int materialGained = Inventory.Instance.materialCount - originalMaterialCount;
-
-        // Add the gained resources to the inventory
+        // Add the predefined gained resources to the inventory
         Inventory.Instance.AddFood(foodGained);
         Inventory.Instance.AddWater(waterGained);
         Inventory.Instance.AddMaterials(materialsGained);
