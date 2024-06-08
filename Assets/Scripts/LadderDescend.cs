@@ -25,7 +25,7 @@ public class LadderDescend : MonoBehaviour
             ladder = other.transform.parent; // Assuming ladder is a child of the ladder bottom trigger
             if (ladder != null)
             {
-                ladderBottomPosition = ladder.position; // Store ladder bottom position
+                ladderBottomPosition = other.transform.position; // Get the bottom position of the trigger
                 Debug.Log("Calculated ladderBottomPosition: " + ladderBottomPosition);
                 StartDescending();
             }
@@ -48,10 +48,18 @@ public class LadderDescend : MonoBehaviour
     void StartDescending()
     {
         isDescending = true;
-        agent.enabled = false;
+        agent.enabled = false; // Disable NavMeshAgent
         characterMovement.enabled = false; // Disable character movement while descending
         Debug.Log("Started Descending");
         // Optional: set animation state to descending if you have animations
+    }
+
+    void Update()
+    {
+        if (isDescending)
+        {
+            DescendLadder();
+        }
     }
 
     void DescendLadder()
@@ -61,7 +69,7 @@ public class LadderDescend : MonoBehaviour
         Debug.Log("Descending... Current Position: " + transform.position);
 
         // Check if the character has reached the bottom of the ladder
-        if (transform.position.y <= ladderBottomPosition.y)
+        if (transform.position.y <= ladderBottomPosition.y + 0.1f) // Adding a small offset for precision
         {
             Debug.Log("Reached bottom of the ladder");
             transform.position = ladderBottomPosition; // Ensure precise position
@@ -72,7 +80,7 @@ public class LadderDescend : MonoBehaviour
     void StopDescending()
     {
         isDescending = false;
-        agent.enabled = true;
+        agent.enabled = true; // Re-enable NavMeshAgent
         characterMovement.enabled = true; // Re-enable character movement
         Debug.Log("Stopped Descending");
         // Optional: set animation state back to walking
