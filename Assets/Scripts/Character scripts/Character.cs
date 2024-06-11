@@ -14,7 +14,12 @@ public class Character : MonoBehaviour
     public float maxHunger = 100f;
     public float maxThirst = 100f;
 
-    public Inventory inventory;
+    private World world;
+
+    void Start()
+    {
+        world = FindObjectOfType<World>(); // Assuming there's only one World instance
+    }
 
     void Update()
     {
@@ -44,10 +49,10 @@ public class Character : MonoBehaviour
 
     public void TryToEat()
     {
-        if (inventory.HasFood(1))
+        if (world.HasFood(1))
         {
             Eat(10); // Adjust the food value as needed
-            inventory.RemoveFood(1); // Remove one unit of food from inventory
+            world.RemoveFood(1); // Remove one unit of food from inventory
         }
         else
         {
@@ -57,10 +62,10 @@ public class Character : MonoBehaviour
 
     public void TryToDrink()
     {
-        if (inventory.HasWater(1))
+        if (world.HasWater(1))
         {
             Drink(10); // Adjust the water value as needed
-            inventory.RemoveWater(1); // Remove one unit of water from inventory
+            world.RemoveWater(1); // Remove one unit of water from inventory
         }
         else
         {

@@ -131,8 +131,8 @@ public class BuildingPlacement : MonoBehaviour
     void GetGridPosition(Vector3 worldPosition, out int x, out int y)
     {
         Vector3 localPosition = gridSystem.transform.InverseTransformPoint(worldPosition);
-        x = Mathf.FloorToInt(localPosition.x / gridSystem.cellSize);
-        y = Mathf.FloorToInt(localPosition.z / gridSystem.cellSize);
+        x = Mathf.FloorToInt(localPosition.x / gridSystem.cellWidth);
+        y = Mathf.FloorToInt(localPosition.z / gridSystem.cellHeight);
     }
 
     public void SelectBuilding(int index)

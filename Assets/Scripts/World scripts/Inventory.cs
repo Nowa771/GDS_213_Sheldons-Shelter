@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    // Static instance property
     public static Inventory Instance { get; private set; }
 
     public int foodCount;
@@ -18,7 +17,6 @@ public class Inventory : MonoBehaviour
 
     private void Awake()
     {
-        // Set the static instance property
         if (Instance == null)
         {
             Instance = this;
@@ -34,14 +32,12 @@ public class Inventory : MonoBehaviour
         UpdateUI();
     }
 
-    // Method to add food
     public void AddFood(int amount)
     {
         foodCount += amount;
         UpdateUI();
     }
 
-    // Method to remove food
     public void RemoveFood(int amount)
     {
         if (foodCount >= amount)
@@ -51,14 +47,12 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    // Method to add water
     public void AddWater(int amount)
     {
         waterCount += amount;
         UpdateUI();
     }
 
-    // Method to remove water
     public void RemoveWater(int amount)
     {
         if (waterCount >= amount)
@@ -68,14 +62,12 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    // Method to add materials
     public void AddMaterials(int amount)
     {
         materialCount += amount;
         UpdateUI();
     }
 
-    // Method to remove materials
     public void RemoveMaterials(int amount)
     {
         if (materialCount >= amount)
@@ -85,25 +77,21 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    // Method to check food availability
     public bool HasFood(int amount)
     {
         return foodCount >= amount;
     }
 
-    // Method to check water availability
     public bool HasWater(int amount)
     {
         return waterCount >= amount;
     }
 
-    // Method to check materials availability
     public bool HasMaterials(int amount)
     {
         return materialCount >= amount;
     }
 
-    // Method to update UI
     private void UpdateUI()
     {
         foodText.text = "Food: " + foodCount;
