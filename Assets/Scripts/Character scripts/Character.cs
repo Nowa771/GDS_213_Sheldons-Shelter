@@ -51,8 +51,8 @@ public class Character : MonoBehaviour
     {
         if (world.HasFood(1))
         {
-            Eat(10); // Adjust the food value as needed
-            world.RemoveFood(1); // Remove one unit of food from inventory
+            Eat(10); 
+            world.RemoveFood(1);
         }
         else
         {
@@ -64,8 +64,8 @@ public class Character : MonoBehaviour
     {
         if (world.HasWater(1))
         {
-            Drink(10); // Adjust the water value as needed
-            world.RemoveWater(1); // Remove one unit of water from inventory
+            Drink(10);
+            world.RemoveWater(1);
         }
         else
         {

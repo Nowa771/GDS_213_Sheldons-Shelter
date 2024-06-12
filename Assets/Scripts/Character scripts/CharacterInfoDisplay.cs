@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class CharacterInfoDisplay : MonoBehaviour
 {
-    public Text nameText; // Reference to the name Text element
+    public Text nameText;
     public Text hungerText;
     public Text thirstText;
     public GameObject infoPanel;
     public Button eatButton;
     public Button drinkButton;
-    public Button closeButton; // New close button
+    public Button closeButton; // Add reference to the close button
 
     private Character selectedCharacter;
 
@@ -32,7 +32,8 @@ public class CharacterInfoDisplay : MonoBehaviour
             drinkButton.onClick.AddListener(TryToDrink);
         }
 
-        if (closeButton != null) // Add listener for close button
+        // Add listener for the close button
+        if (closeButton != null)
         {
             closeButton.onClick.AddListener(ClosePanel);
         }
@@ -48,7 +49,17 @@ public class CharacterInfoDisplay : MonoBehaviour
                 Character character = hit.collider.GetComponent<Character>();
                 if (character != null)
                 {
-                    SelectCharacter(character);
+                    if (selectedCharacter == character && infoPanel.activeSelf)
+                    {
+                        if (!RectTransformUtility.RectangleContainsScreenPoint(eatButton.GetComponent<RectTransform>(), Input.mousePosition))
+                        {
+                            ClosePanel();
+                        }
+                    }
+                    else
+                    {
+                        SelectCharacter(character);
+                    }
                 }
             }
         }
@@ -73,6 +84,8 @@ public class CharacterInfoDisplay : MonoBehaviour
         {
             infoPanel.SetActive(true); // Show the panel when a character is selected
         }
+
+        UpdateCharacterInfo();
     }
 
     void UpdateCharacterInfo()
@@ -103,13 +116,16 @@ public class CharacterInfoDisplay : MonoBehaviour
         }
     }
 
-    void ClosePanel() // Method to close the panel
+    void ClosePanel()
     {
         if (infoPanel != null)
         {
             infoPanel.SetActive(false);
-            selectedCharacter.GetComponent<CharacterMovement>().Deselect(); // Deselect the character
-            selectedCharacter = null; // Reset selected character
+        }
+        if (selectedCharacter != null)
+        {
+            selectedCharacter.GetComponent<CharacterMovement>().Deselect();
+            selectedCharacter = null;
         }
     }
 }

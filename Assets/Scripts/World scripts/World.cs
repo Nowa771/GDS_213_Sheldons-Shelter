@@ -6,28 +6,43 @@ public class World : MonoBehaviour
 {
     public Inventory inventory;
 
-    void Start()
+    // Ensure that the inventory reference is properly assigned in the Inspector
+    public void SetInventory(Inventory inv)
     {
-        inventory = new Inventory();
+        inventory = inv;
     }
 
     public bool HasFood(int amount)
     {
-        return inventory.HasFood(amount);
+        if (inventory != null)
+        {
+            return inventory.HasFood(amount);
+        }
+        return false;
     }
 
     public bool HasWater(int amount)
     {
-        return inventory.HasWater(amount);
+        if (inventory != null)
+        {
+            return inventory.HasWater(amount);
+        }
+        return false;
     }
 
     public void RemoveFood(int amount)
     {
-        inventory.RemoveFood(amount);
+        if (inventory != null)
+        {
+            inventory.RemoveFood(amount);
+        }
     }
 
     public void RemoveWater(int amount)
     {
-        inventory.RemoveWater(amount);
+        if (inventory != null)
+        {
+            inventory.RemoveWater(amount);
+        }
     }
 }
