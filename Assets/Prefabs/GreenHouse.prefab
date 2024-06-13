@@ -1408,7 +1408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bee176a232d76647ac4198a6eee5141, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interval: 15
+  interval: 35
   foodAmount: 1
   waterAmount: 0
   materialAmount: 0
