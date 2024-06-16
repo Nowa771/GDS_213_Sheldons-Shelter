@@ -1,12 +1,14 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
+using Unity.AI.Navigation;
 
 public class NavMeshBaker : MonoBehaviour
 {
     private NavMeshSurface navMeshSurface;
+
+    [SerializeField]
+    private float delayBeforeBake = 3.0f; 
 
     void Start()
     {
@@ -23,6 +25,13 @@ public class NavMeshBaker : MonoBehaviour
 
     public void BakeNavMesh()
     {
+        StartCoroutine(DelayedBakeNavMesh());
+    }
+
+    IEnumerator DelayedBakeNavMesh()
+    {
+        yield return new WaitForSeconds(delayBeforeBake);
+
         navMeshSurface.BuildNavMesh();
     }
 

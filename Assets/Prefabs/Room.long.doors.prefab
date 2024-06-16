@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: ff7df0f4f70680f458b8ded07de51a5b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 33.893776
+      value: 7.85
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ff7df0f4f70680f458b8ded07de51a5b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.0188637
+      value: 8.277505
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ff7df0f4f70680f458b8ded07de51a5b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -21.482393
+      value: -55.03
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ff7df0f4f70680f458b8ded07de51a5b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -48,6 +48,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4683669308469848369, guid: ff7df0f4f70680f458b8ded07de51a5b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cafcad678abf09b4891e1887341eefa9, type: 2}
+    - target: {fileID: -1461304994638716399, guid: ff7df0f4f70680f458b8ded07de51a5b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cafcad678abf09b4891e1887341eefa9, type: 2}
+    - target: {fileID: -804731622281664130, guid: ff7df0f4f70680f458b8ded07de51a5b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cafcad678abf09b4891e1887341eefa9, type: 2}
+    - target: {fileID: -678588488315902003, guid: ff7df0f4f70680f458b8ded07de51a5b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cafcad678abf09b4891e1887341eefa9, type: 2}
     - target: {fileID: 919132149155446097, guid: ff7df0f4f70680f458b8ded07de51a5b, type: 3}
       propertyPath: m_Name
       value: Room.long.doors

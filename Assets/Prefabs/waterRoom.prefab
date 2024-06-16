@@ -95,7 +95,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: ff7df0f4f70680f458b8ded07de51a5b, type: 3}
+  - {fileID: 2100000, guid: cafcad678abf09b4891e1887341eefa9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -533,7 +533,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: ff7df0f4f70680f458b8ded07de51a5b, type: 3}
+  - {fileID: 2100000, guid: cafcad678abf09b4891e1887341eefa9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -721,7 +721,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: ff7df0f4f70680f458b8ded07de51a5b, type: 3}
+  - {fileID: 2100000, guid: cafcad678abf09b4891e1887341eefa9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1637,6 +1637,7 @@ GameObject:
   m_Component:
   - component: {fileID: 11917767191995335}
   - component: {fileID: 7663963385318515573}
+  - component: {fileID: 1987229365687062127}
   m_Layer: 0
   m_Name: waterRoom
   m_TagString: Untagged
@@ -1683,10 +1684,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bee176a232d76647ac4198a6eee5141, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interval: 35
+  interval: 2
   foodAmount: 0
   waterAmount: 1
   materialAmount: 0
+--- !u!65 &1987229365687062127
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3479962528301662347}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 12.685524, y: 6.6188326, z: 13.485519}
+  m_Center: {x: -5.842762, y: 2.8094163, z: -0.05091858}
 --- !u!1 &3739077128448029381
 GameObject:
   m_ObjectHideFlags: 0
@@ -3114,7 +3136,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: ff7df0f4f70680f458b8ded07de51a5b, type: 3}
+  - {fileID: 2100000, guid: cafcad678abf09b4891e1887341eefa9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

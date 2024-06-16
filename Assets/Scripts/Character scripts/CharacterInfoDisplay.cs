@@ -8,6 +8,7 @@ public class CharacterInfoDisplay : MonoBehaviour
     public Text nameText;
     public Text hungerText;
     public Text thirstText;
+    public Text healthText; // Add a Text field for health
     public GameObject infoPanel;
     public Button eatButton;
     public Button drinkButton;
@@ -90,11 +91,12 @@ public class CharacterInfoDisplay : MonoBehaviour
 
     void UpdateCharacterInfo()
     {
-        if (nameText != null && hungerText != null && thirstText != null && selectedCharacter != null)
+        if (nameText != null && hungerText != null && thirstText != null && healthText != null && selectedCharacter != null)
         {
             nameText.text = "Name: " + selectedCharacter.characterName;
             hungerText.text = "Hunger: " + selectedCharacter.hunger.ToString("F2");
             thirstText.text = "Thirst: " + selectedCharacter.thirst.ToString("F2");
+            healthText.text = "Health: " + selectedCharacter.health.ToString("F2"); // Display health value
         }
     }
 

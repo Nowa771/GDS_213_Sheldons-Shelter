@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
+using Unity.AI.Navigation;
 
 public class BuildingPlacement : MonoBehaviour
 {
@@ -9,11 +11,15 @@ public class BuildingPlacement : MonoBehaviour
     public List<int> buildingCosts; // List of material costs for each building
     public GridSystem gridSystem;
     public GameObject selectionPanel;
+    public NavMeshSurface navMeshSurface; // Reference to your NavMeshSurface
 
     private GameObject buildingPreview;
     private bool buildMode = false;
     private GameObject selectedBuildingPrefab;
     private int selectedBuildingCost;
+
+    [SerializeField]
+    private float navMeshBakeDelay = 1.0f; // Delay before baking NavMesh
 
     void Start()
     {
@@ -88,6 +94,7 @@ public class BuildingPlacement : MonoBehaviour
         {
             buildingPreview.SetActive(true);
             buildingPreview.transform.position = gridSystem.GetCellCenter(x, y);
+            buildingPreview.transform.rotation = Quaternion.Euler(0f, -90f, 0f);
         }
         else
         {
@@ -110,11 +117,27 @@ public class BuildingPlacement : MonoBehaviour
             gridSystem.OccupyCell(x, y);
             Inventory.Instance.RemoveMaterials(selectedBuildingCost); // Deduct materials
             Destroy(buildingPreview);
+
+            // Trigger NavMesh baking after a delay
+            StartCoroutine(DelayedNavMeshBake());
         }
         else
         {
-            // Optionally, provide feedback that the player does not have enough materials
             Debug.Log("Not enough materials to place the building.");
+        }
+    }
+
+    IEnumerator DelayedNavMeshBake()
+    {
+        yield return new WaitForSeconds(navMeshBakeDelay);
+
+        if (navMeshSurface != null)
+        {
+            navMeshSurface.BuildNavMesh();
+        }
+        else
+        {
+            Debug.LogError("NavMeshSurface reference is missing.");
         }
     }
 
@@ -140,7 +163,7 @@ public class BuildingPlacement : MonoBehaviour
         if (index >= 0 && index < buildingPrefabs.Count)
         {
             selectedBuildingPrefab = buildingPrefabs[index];
-            selectedBuildingCost = buildingCosts[index]; // Update the cost for the selected building
+            selectedBuildingCost = buildingCosts[index];
             if (buildingPreview != null)
             {
                 Destroy(buildingPreview);

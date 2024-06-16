@@ -22,15 +22,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2082638e22592bd41bbfb9074edde961, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 22.05
+      value: 33.58
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2082638e22592bd41bbfb9074edde961, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.818
+      value: -9.022388
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2082638e22592bd41bbfb9074edde961, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.02
+      value: 5.3032494
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2082638e22592bd41bbfb9074edde961, type: 3}
       propertyPath: m_LocalRotation.w
@@ -38,15 +38,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2082638e22592bd41bbfb9074edde961, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2082638e22592bd41bbfb9074edde961, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2082638e22592bd41bbfb9074edde961, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2082638e22592bd41bbfb9074edde961, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -140,15 +140,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f8aae095d56c6e45872cbcb181f86bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: Penny
+  characterName: Sheldon
   hunger: 10
   thirst: 10
+  health: 99
   hungerDecayRate: 0.03
   thirstDecayRate: 0.03
-  healthDecayRate: 1
+  healthDecayRate: 0.5
   maxHunger: 10
   maxThirst: 10
-  inventory: {fileID: 0}
+  maxHealth: 99
+  deathSound: {fileID: 0}
 --- !u!114 &4783996547685494812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,9 +243,9 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5471618102369134292}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 38f5071ae4a05eb4f9957f14e6e4e841, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

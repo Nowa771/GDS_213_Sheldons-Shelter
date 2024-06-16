@@ -7,18 +7,29 @@ public class Character : MonoBehaviour
     public string characterName;
     public float hunger;
     public float thirst;
+    public float health;
     public float hungerDecayRate = 1f;
     public float thirstDecayRate = 1f;
     public float healthDecayRate = 1f;
 
     public float maxHunger = 100f;
     public float maxThirst = 100f;
+    public float maxHealth = 100f;
+
+    public AudioClip deathSound; // Assign this in the Inspector
+    private AudioSource audioSource;
+    private bool isDead = false;
 
     private World world;
 
     void Start()
     {
-        world = FindObjectOfType<World>(); // Assuming there's only one World instance
+        world = FindObjectOfType<World>();
+        hunger = maxHunger;
+        thirst = maxThirst;
+        health = maxHealth;
+
+        audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     void Update()
@@ -28,15 +39,26 @@ public class Character : MonoBehaviour
 
     void ManageNeeds()
     {
+        if (isDead) return;
+
         hunger -= Time.deltaTime * hungerDecayRate;
         thirst -= Time.deltaTime * thirstDecayRate;
 
         if (hunger <= 0 || thirst <= 0)
         {
-            // health -= Time.deltaTime * healthDecayRate;
+            health -= Time.deltaTime * healthDecayRate;
         }
 
-        if (Input.GetKeyDown(KeyCode.E)) // Example key for eating
+        hunger = Mathf.Clamp(hunger, 0, maxHunger);
+        thirst = Mathf.Clamp(thirst, 0, maxThirst);
+        health = Mathf.Clamp(health, 0, maxHealth);
+
+        if (health <= 0 && !isDead)
+        {
+            HandleDeath();
+        }
+
+        /* if (Input.GetKeyDown(KeyCode.E)) // Example key for eating
         {
             TryToEat();
         }
@@ -44,14 +66,27 @@ public class Character : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R)) // Example key for drinking
         {
             TryToDrink();
-        }
+        }*/
+    }
+
+    void HandleDeath()
+    {
+        isDead = true;
+        audioSource.PlayOneShot(deathSound);
+        StartCoroutine(DisappearAfterSound());
+    }
+
+    IEnumerator DisappearAfterSound()
+    {
+        yield return new WaitForSeconds(deathSound.length);
+        gameObject.SetActive(false); // Makes the character disappear
     }
 
     public void TryToEat()
     {
         if (world.HasFood(1))
         {
-            Eat(10); 
+            Eat(10);
             world.RemoveFood(1);
         }
         else
