@@ -63,7 +63,7 @@ public class GridSystem : MonoBehaviour
         gridArray[x, y] = true;
     }
 
-    public void FreeCell(int x, int y)
+    public void ClearCell(int x, int y)
     {
         gridArray[x, y] = false;
     }

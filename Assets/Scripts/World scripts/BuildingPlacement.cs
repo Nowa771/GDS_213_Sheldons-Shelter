@@ -17,6 +17,7 @@ public class BuildingPlacement : MonoBehaviour
     private bool buildMode = false;
     private GameObject selectedBuildingPrefab;
     private int selectedBuildingCost;
+    private Dictionary<Vector2Int, GameObject> placedBuildings = new Dictionary<Vector2Int, GameObject>();
 
     [SerializeField]
     private float navMeshBakeDelay = 1.0f; // Delay before baking NavMesh
@@ -41,6 +42,11 @@ public class BuildingPlacement : MonoBehaviour
         if (buildMode)
         {
             UpdateBuildingPlacement();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            RemoveBuilding();
         }
     }
 
@@ -107,6 +113,7 @@ public class BuildingPlacement : MonoBehaviour
         Vector3 mousePosition = GetMouseWorldPosition();
         int x, y;
         GetGridPosition(mousePosition, out x, out y);
+        Vector2Int gridPos = new Vector2Int(x, y);
 
         if (gridSystem.IsCellAvailable(x, y) && Inventory.Instance.HasMaterials(selectedBuildingCost))
         {
@@ -115,6 +122,7 @@ public class BuildingPlacement : MonoBehaviour
             GameObject newBuilding = Instantiate(selectedBuildingPrefab, gridSystem.GetCellCenter(x, y), rotation);
 
             gridSystem.OccupyCell(x, y);
+            placedBuildings[gridPos] = newBuilding;
             Inventory.Instance.RemoveMaterials(selectedBuildingCost); // Deduct materials
             Destroy(buildingPreview);
 
@@ -124,6 +132,25 @@ public class BuildingPlacement : MonoBehaviour
         else
         {
             Debug.Log("Not enough materials to place the building.");
+        }
+    }
+
+    void RemoveBuilding()
+    {
+        Vector3 mousePosition = GetMouseWorldPosition();
+        int x, y;
+        GetGridPosition(mousePosition, out x, out y);
+        Vector2Int gridPos = new Vector2Int(x, y);
+
+        if (placedBuildings.ContainsKey(gridPos))
+        {
+            GameObject buildingToRemove = placedBuildings[gridPos];
+            Destroy(buildingToRemove);
+            placedBuildings.Remove(gridPos);
+            gridSystem.ClearCell(x, y);
+
+            // Trigger NavMesh baking after a delay
+            StartCoroutine(DelayedNavMeshBake());
         }
     }
 
