@@ -8,10 +8,11 @@ using Unity.AI.Navigation;
 public class BuildingPlacement : MonoBehaviour
 {
     public List<GameObject> buildingPrefabs;
-    public List<int> buildingCosts; // List of material costs for each building
+    public List<int> buildingCosts;
     public GridSystem gridSystem;
     public GameObject selectionPanel;
-    public NavMeshSurface navMeshSurface; // Reference to your NavMeshSurface
+    public Dropdown buildingDropdown;
+    public NavMeshSurface navMeshSurface;
 
     private GameObject buildingPreview;
     private bool buildMode = false;
@@ -25,11 +26,15 @@ public class BuildingPlacement : MonoBehaviour
     void Start()
     {
         selectionPanel.SetActive(false);
+        PopulateDropdown();
+
         if (buildingPrefabs.Count > 0)
         {
             selectedBuildingPrefab = buildingPrefabs[0];
             selectedBuildingCost = buildingCosts[0];
         }
+
+        buildingDropdown.onValueChanged.AddListener(delegate { DropdownValueChanged(buildingDropdown); });
     }
 
     void Update()
@@ -54,7 +59,7 @@ public class BuildingPlacement : MonoBehaviour
     {
         buildMode = !buildMode;
         selectionPanel.SetActive(buildMode);
-        Time.timeScale = buildMode ? 0 : 1;
+        //Time.timeScale = buildMode ? 0 : 1;
 
         if (buildMode)
         {
@@ -185,8 +190,20 @@ public class BuildingPlacement : MonoBehaviour
         y = Mathf.FloorToInt(localPosition.z / gridSystem.cellHeight);
     }
 
-    public void SelectBuilding(int index)
+    void PopulateDropdown()
     {
+        List<string> options = new List<string>();
+        foreach (var prefab in buildingPrefabs)
+        {
+            options.Add(prefab.name);
+        }
+        buildingDropdown.ClearOptions();
+        buildingDropdown.AddOptions(options);
+    }
+
+    void DropdownValueChanged(Dropdown change)
+    {
+        int index = change.value;
         if (index >= 0 && index < buildingPrefabs.Count)
         {
             selectedBuildingPrefab = buildingPrefabs[index];
@@ -196,8 +213,6 @@ public class BuildingPlacement : MonoBehaviour
                 Destroy(buildingPreview);
                 StartPlacingBuilding();
             }
-            selectionPanel.SetActive(false);
-            Time.timeScale = 1;
         }
     }
 }

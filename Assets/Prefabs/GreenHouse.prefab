@@ -1333,6 +1333,7 @@ GameObject:
   - component: {fileID: 2102634958267880642}
   - component: {fileID: 3963655455870915537}
   - component: {fileID: 2614607326118587601}
+  - component: {fileID: 4384462380394996943}
   m_Layer: 0
   m_Name: GreenHouse
   m_TagString: Untagged
@@ -1391,7 +1392,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
@@ -1408,10 +1409,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bee176a232d76647ac4198a6eee5141, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interval: 35
-  foodAmount: 1
+  interval: 10
+  foodAmount: 2
   waterAmount: 0
   materialAmount: 0
+--- !u!65 &4384462380394996943
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7133895260857713804}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 11.321548, y: 6.6791534, z: 12.934769}
+  m_Center: {x: -5.160774, y: 2.8395767, z: -0.1458664}
 --- !u!1 &7591715416164401029
 GameObject:
   m_ObjectHideFlags: 0

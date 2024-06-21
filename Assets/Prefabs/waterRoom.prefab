@@ -775,6 +775,7 @@ GameObject:
   - component: {fileID: 1335099221170304776}
   - component: {fileID: 6910384428053405204}
   - component: {fileID: 7846041507719495245}
+  - component: {fileID: 1774493784721326820}
   m_Layer: 0
   m_Name: body_LP
   m_TagString: Untagged
@@ -847,6 +848,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1774493784721326820
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971194662293976728}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.578752, y: 0.4175628, z: 1.5488237}
+  m_Center: {x: -0.08143701, y: -0.00012207031, z: 0.77441233}
 --- !u!1 &1007353284415178356
 GameObject:
   m_ObjectHideFlags: 0
@@ -1684,9 +1706,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bee176a232d76647ac4198a6eee5141, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interval: 2
+  interval: 10
   foodAmount: 0
-  waterAmount: 1
+  waterAmount: 2
   materialAmount: 0
 --- !u!65 &1987229365687062127
 BoxCollider:
@@ -1704,7 +1726,7 @@ BoxCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
-  m_ProvidesContacts: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 12.685524, y: 6.6188326, z: 13.485519}
@@ -1720,6 +1742,7 @@ GameObject:
   - component: {fileID: 3985196907693964458}
   - component: {fileID: 3939810131320828154}
   - component: {fileID: 8848511084966771244}
+  - component: {fileID: 2531926819204733946}
   m_Layer: 0
   m_Name: water tank
   m_TagString: Untagged
@@ -1792,6 +1815,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2531926819204733946
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3739077128448029381}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.020799894, y: 0.04302457, z: 0.029569816}
+  m_Center: {x: 0.00019712048, y: -0.0000004786998, z: 0.014784908}
 --- !u!1 &3784115749630196405
 GameObject:
   m_ObjectHideFlags: 0
@@ -2502,6 +2546,7 @@ GameObject:
   - component: {fileID: 2775437994349806771}
   - component: {fileID: 3795839346433948419}
   - component: {fileID: 4040907368865535546}
+  - component: {fileID: 235831925802603941}
   m_Layer: 0
   m_Name: polySurface107
   m_TagString: Untagged
@@ -2574,6 +2619,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &235831925802603941
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6109313639726037562}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.07781465, y: 0.087883465, z: 0.116067745}
+  m_Center: {x: -0.002499951, y: 0.028964497, z: 0.04061124}
 --- !u!1 &6205787875633791154
 GameObject:
   m_ObjectHideFlags: 0
