@@ -7,6 +7,7 @@ public class Room : MonoBehaviour
     public int baseFoodAmount = 1;
     public int baseWaterAmount = 1;
     public int baseMaterialAmount = 1;
+    public string roomName = "Default Room";
 
     private int peopleInRoom = 0;
 
@@ -49,5 +50,19 @@ public class Room : MonoBehaviour
                 Debug.Log($"Resources added to inventory: Food {foodAmount}, Water {waterAmount}, Materials {materialAmount}");
             }
         }
+    }
+
+    private void OnMouseDown()
+    {
+        RoomSelectionManager.Instance.ShowRoomStats(this);
+    }
+
+    public string GetRoomStats()
+    {
+        return $"{roomName}\n" +
+               $"Produces:\n" +
+               $"- Food: {baseFoodAmount} per person per {interval} seconds\n" +
+               $"- Water: {baseWaterAmount} per person per {interval} seconds\n" +
+               $"- Materials: {baseMaterialAmount} per person per {interval} seconds";
     }
 }

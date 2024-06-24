@@ -1413,6 +1413,7 @@ MonoBehaviour:
   baseFoodAmount: 1
   baseWaterAmount: 0
   baseMaterialAmount: 0
+  roomName: Greenhouse
 --- !u!65 &4384462380394996943
 BoxCollider:
   m_ObjectHideFlags: 0

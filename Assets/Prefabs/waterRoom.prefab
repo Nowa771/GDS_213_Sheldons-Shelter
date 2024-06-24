@@ -1710,6 +1710,7 @@ MonoBehaviour:
   baseFoodAmount: 0
   baseWaterAmount: 1
   baseMaterialAmount: 0
+  roomName: Water room
 --- !u!65 &1987229365687062127
 BoxCollider:
   m_ObjectHideFlags: 0
