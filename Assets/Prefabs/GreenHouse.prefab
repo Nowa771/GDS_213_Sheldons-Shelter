@@ -1410,9 +1410,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interval: 10
-  foodAmount: 2
-  waterAmount: 0
-  materialAmount: 0
+  baseFoodAmount: 1
+  baseWaterAmount: 0
+  baseMaterialAmount: 0
 --- !u!65 &4384462380394996943
 BoxCollider:
   m_ObjectHideFlags: 0

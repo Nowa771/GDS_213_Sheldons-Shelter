@@ -46,12 +46,14 @@ public class BuildingPlacement : MonoBehaviour
 
         if (buildMode)
         {
-            UpdateBuildingPlacement();
-        }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            RemoveBuilding();
+            if (selectedBuildingPrefab != null)
+            {
+                UpdateBuildingPlacement();
+            }
+            else
+            {
+                UpdateBuildingRemoval();
+            }
         }
     }
 
@@ -140,6 +142,14 @@ public class BuildingPlacement : MonoBehaviour
         }
     }
 
+    void UpdateBuildingRemoval()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            RemoveBuilding();
+        }
+    }
+
     void RemoveBuilding()
     {
         Vector3 mousePosition = GetMouseWorldPosition();
@@ -193,6 +203,7 @@ public class BuildingPlacement : MonoBehaviour
     void PopulateDropdown()
     {
         List<string> options = new List<string>();
+        options.Add("Remove Building"); // Add remove building option first
         foreach (var prefab in buildingPrefabs)
         {
             options.Add(prefab.name);
@@ -204,10 +215,19 @@ public class BuildingPlacement : MonoBehaviour
     void DropdownValueChanged(Dropdown change)
     {
         int index = change.value;
-        if (index >= 0 && index < buildingPrefabs.Count)
+        if (index == 0) // If the first option "Remove Building" is selected
         {
-            selectedBuildingPrefab = buildingPrefabs[index];
-            selectedBuildingCost = buildingCosts[index];
+            selectedBuildingPrefab = null;
+            selectedBuildingCost = 0;
+            if (buildingPreview != null)
+            {
+                Destroy(buildingPreview);
+            }
+        }
+        else if (index > 0 && index <= buildingPrefabs.Count)
+        {
+            selectedBuildingPrefab = buildingPrefabs[index - 1]; // Adjust index for 0-based list
+            selectedBuildingCost = buildingCosts[index - 1]; // Adjust index for 0-based list
             if (buildingPreview != null)
             {
                 Destroy(buildingPreview);

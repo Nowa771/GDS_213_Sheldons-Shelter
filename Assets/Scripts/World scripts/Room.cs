@@ -4,17 +4,17 @@ using UnityEngine;
 public class Room : MonoBehaviour
 {
     public float interval = 5f;
-    public int foodAmount = 1;
-    public int waterAmount = 1;
-    public int materialAmount = 1;
+    public int baseFoodAmount = 1;
+    public int baseWaterAmount = 1;
+    public int baseMaterialAmount = 1;
 
-    private bool playerInRoom = false;
+    private int peopleInRoom = 0;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            playerInRoom = true;
+            peopleInRoom++;
         }
     }
 
@@ -22,7 +22,7 @@ public class Room : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            playerInRoom = false;
+            peopleInRoom--;
         }
     }
 
@@ -36,13 +36,17 @@ public class Room : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(interval);
-            if (playerInRoom)
+            if (peopleInRoom > 0)
             {
+                int foodAmount = baseFoodAmount * peopleInRoom;
+                int waterAmount = baseWaterAmount * peopleInRoom;
+                int materialAmount = baseMaterialAmount * peopleInRoom;
+
                 Inventory.Instance.AddFood(foodAmount); // food amount
                 Inventory.Instance.AddWater(waterAmount); // water amount
                 Inventory.Instance.AddMaterials(materialAmount); // material amount
 
-                Debug.Log("Resources added to inventory.");
+                Debug.Log($"Resources added to inventory: Food {foodAmount}, Water {waterAmount}, Materials {materialAmount}");
             }
         }
     }
