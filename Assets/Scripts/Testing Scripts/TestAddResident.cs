@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class TestAddResident : MonoBehaviour
 {
-    public GameObject residentPrefab; // Prefab for the resident
+    public GameObject residentPrefab;
     private Shelter shelter;
+    public CharacterManager characterManager;
 
     void Start()
     {
@@ -15,6 +16,11 @@ public class TestAddResident : MonoBehaviour
         {
             Debug.LogError("Shelter not found in the scene.");
             return;
+        }
+
+        if (characterManager == null)
+        {
+            Debug.LogError("CharacterManager not assigned.");
         }
     }
 
@@ -33,7 +39,20 @@ public class TestAddResident : MonoBehaviour
             GameObject newResident = Instantiate(residentPrefab);
             bool added = shelter.AddResident(newResident);
 
-            if (!added)
+            if (added)
+            {
+                Character newCharacter = newResident.GetComponent<Character>();
+                if (newCharacter != null && characterManager != null)
+                {
+                    characterManager.AddCharacter(newCharacter);
+                }
+                else
+                {
+                    Debug.LogError("Newly instantiated resident does not have a Character component or CharacterManager is not assigned.");
+                    Destroy(newResident);
+                }
+            }
+            else
             {
                 Destroy(newResident);
             }

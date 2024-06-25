@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2082638e22592bd41bbfb9074edde961, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 33.58
+      value: 36.13586
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2082638e22592bd41bbfb9074edde961, type: 3}
       propertyPath: m_LocalPosition.y
@@ -30,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2082638e22592bd41bbfb9074edde961, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.3032494
+      value: 6.2323427
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2082638e22592bd41bbfb9074edde961, type: 3}
       propertyPath: m_LocalRotation.w
@@ -141,14 +141,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: Sheldon
-  hunger: 10
-  thirst: 10
+  hunger: 99
+  thirst: 99
   health: 99
-  hungerDecayRate: 0.05
-  thirstDecayRate: 0.05
+  hungerDecayRate: 0.5
+  thirstDecayRate: 0.1
   healthDecayRate: 1
-  maxHunger: 10
-  maxThirst: 10
+  maxHunger: 99
+  maxThirst: 99
   maxHealth: 99
   deathSound: {fileID: 8300000, guid: a0a35b4dd99eac746b9fb0e1a0c37a31, type: 3}
 --- !u!114 &4783996547685494812

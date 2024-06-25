@@ -86,7 +86,7 @@ public class Character : MonoBehaviour
     {
         if (world.HasFood(1))
         {
-            Eat(10);
+            Eat(80);
             world.RemoveFood(1);
         }
         else
@@ -99,7 +99,7 @@ public class Character : MonoBehaviour
     {
         if (world.HasWater(1))
         {
-            Drink(10);
+            Drink(80);
             world.RemoveWater(1);
         }
         else
