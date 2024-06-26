@@ -8,9 +8,11 @@ public class CharacterInfoDisplay : MonoBehaviour
     public Text nameText;
     public Text hungerText;
     public Text thirstText;
-    public Text healthText;
+    public Text healthText; // Add a Text field for health
     public GameObject infoPanel;
-    public Button closeButton;
+    public Button eatButton;
+    public Button drinkButton;
+    public Button closeButton; // Add reference to the close button
 
     private Character selectedCharacter;
 
@@ -18,9 +20,20 @@ public class CharacterInfoDisplay : MonoBehaviour
     {
         if (infoPanel != null)
         {
-            infoPanel.SetActive(false);
+            infoPanel.SetActive(false); // Hide the panel initially
         }
 
+        // Add button listeners
+        if (eatButton != null)
+        {
+            eatButton.onClick.AddListener(TryToEat);
+        }
+        if (drinkButton != null)
+        {
+            drinkButton.onClick.AddListener(TryToDrink);
+        }
+
+        // Add listener for the close button
         if (closeButton != null)
         {
             closeButton.onClick.AddListener(ClosePanel);
@@ -29,7 +42,7 @@ public class CharacterInfoDisplay : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)) // Left mouse button clicked
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit))
@@ -39,7 +52,10 @@ public class CharacterInfoDisplay : MonoBehaviour
                 {
                     if (selectedCharacter == character && infoPanel.activeSelf)
                     {
-                        ClosePanel();
+                        if (!RectTransformUtility.RectangleContainsScreenPoint(eatButton.GetComponent<RectTransform>(), Input.mousePosition))
+                        {
+                            ClosePanel();
+                        }
                     }
                     else
                     {
@@ -67,7 +83,7 @@ public class CharacterInfoDisplay : MonoBehaviour
 
         if (infoPanel != null)
         {
-            infoPanel.SetActive(true);
+            infoPanel.SetActive(true); // Show the panel when a character is selected
         }
 
         UpdateCharacterInfo();
@@ -80,7 +96,25 @@ public class CharacterInfoDisplay : MonoBehaviour
             nameText.text = "Name: " + selectedCharacter.characterName;
             hungerText.text = "Hunger: " + selectedCharacter.hunger.ToString("F2");
             thirstText.text = "Thirst: " + selectedCharacter.thirst.ToString("F2");
-            healthText.text = "Health: " + selectedCharacter.health.ToString("F2");
+            healthText.text = "Health: " + selectedCharacter.health.ToString("F2"); // Display health value
+        }
+    }
+
+    void TryToEat()
+    {
+        if (selectedCharacter != null)
+        {
+            selectedCharacter.TryToEat();
+            UpdateCharacterInfo();
+        }
+    }
+
+    void TryToDrink()
+    {
+        if (selectedCharacter != null)
+        {
+            selectedCharacter.TryToDrink();
+            UpdateCharacterInfo();
         }
     }
 

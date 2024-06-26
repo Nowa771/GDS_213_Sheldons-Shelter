@@ -6,12 +6,14 @@ using UnityEngine.AI;
 public class CharacterMovement : MonoBehaviour
 {
     private NavMeshAgent navMeshAgent;
+    private Animator animator;
     private bool isSelected = false;
     private Vector3 hitPoint;
 
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -25,6 +27,9 @@ public class CharacterMovement : MonoBehaviour
                 hitPoint = hit.point;
             }
         }
+
+        float speed = navMeshAgent.velocity.magnitude;
+        animator.SetFloat("Speed", speed);
     }
 
     private void OnDrawGizmos()
