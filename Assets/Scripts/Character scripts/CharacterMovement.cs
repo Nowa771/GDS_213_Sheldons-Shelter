@@ -8,7 +8,7 @@ public class CharacterMovement : MonoBehaviour
     private NavMeshAgent navMeshAgent;
     private Animator animator;
     private bool isSelected = false;
-    private Vector3 hitPoint;
+    private Transform assignedSpot;
 
     void Start()
     {
@@ -18,25 +18,17 @@ public class CharacterMovement : MonoBehaviour
 
     void Update()
     {
-        if (isSelected && Input.GetMouseButtonDown(1)) // Right mouse button clicked
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                navMeshAgent.SetDestination(hit.point);
-                hitPoint = hit.point;
-            }
-        }
-
         float speed = navMeshAgent.velocity.magnitude;
         animator.SetFloat("Speed", speed);
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(hitPoint, 1);
-        Gizmos.DrawLine(Camera.main.transform.position, hitPoint);
+        if (assignedSpot != null)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(assignedSpot.position, 1);
+        }
     }
 
     public void Select()
@@ -47,5 +39,29 @@ public class CharacterMovement : MonoBehaviour
     public void Deselect()
     {
         isSelected = false;
+    }
+
+    public void MoveToRoom(Room room)
+    {
+        Transform spot = room.GetAvailableSpot();
+        if (spot != null)
+        {
+            assignedSpot = spot;
+            navMeshAgent.SetDestination(assignedSpot.position);
+        }
+        else
+        {
+            Debug.Log("No available spots in the room.");
+        }
+    }
+
+    public void SetAssignedSpot(Transform spot)
+    {
+        assignedSpot = spot;
+    }
+
+    public Transform GetAssignedSpot()
+    {
+        return assignedSpot;
     }
 }
