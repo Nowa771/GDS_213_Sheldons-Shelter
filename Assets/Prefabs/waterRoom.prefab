@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8939933971158948678}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: rorkroll (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 1232284419628827625}
   - component: {fileID: 106204258075481598}
   - component: {fileID: 1900362479383584754}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 5072410213720217191}
   - component: {fileID: 8849846197892661778}
   - component: {fileID: 2210803977920143197}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: polySurface111
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 1226127341983456217}
   - component: {fileID: 3026292022295896268}
   - component: {fileID: 6817482177167853682}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -316,7 +316,7 @@ GameObject:
   - component: {fileID: 6290678853896301246}
   - component: {fileID: 4121547438401572835}
   - component: {fileID: 6808331464846923022}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -399,7 +399,7 @@ GameObject:
   - component: {fileID: 8927668204947581878}
   - component: {fileID: 7822376564725590145}
   - component: {fileID: 2841022134714038100}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: bolt_LP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -483,7 +483,7 @@ GameObject:
   - component: {fileID: 3827533671731982876}
   - component: {fileID: 5154419969878757477}
   - component: {fileID: 8870794829738743560}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -587,7 +587,7 @@ GameObject:
   - component: {fileID: 3003912341441756278}
   - component: {fileID: 3453888948170885417}
   - component: {fileID: 4617496438382448499}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: bolt_004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -671,7 +671,7 @@ GameObject:
   - component: {fileID: 119996635432819601}
   - component: {fileID: 6645173399777710498}
   - component: {fileID: 1142535809465152442}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -776,7 +776,7 @@ GameObject:
   - component: {fileID: 6910384428053405204}
   - component: {fileID: 7846041507719495245}
   - component: {fileID: 1774493784721326820}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: body_LP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -880,7 +880,7 @@ GameObject:
   - component: {fileID: 3908555639214261021}
   - component: {fileID: 7468397531759884570}
   - component: {fileID: 4089988999298096381}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: boltTop_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -963,7 +963,7 @@ GameObject:
   - component: {fileID: 5507468100173995345}
   - component: {fileID: 389794549586892551}
   - component: {fileID: 6952238394043074231}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: faucet_LP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1046,7 +1046,7 @@ GameObject:
   - component: {fileID: 6949684347917698637}
   - component: {fileID: 5420569250696492668}
   - component: {fileID: 7908455549257286128}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1127,7 +1127,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6289042689991632479}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: rorkroll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1151,6 +1151,59 @@ Transform:
   - {fileID: 1226127341983456217}
   m_Father: {fileID: 11917767191995335}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1654160748451572352
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8571684531595979256}
+  - component: {fileID: 47958646510736669}
+  m_Layer: 7
+  m_Name: Spot (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8571684531595979256
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1654160748451572352}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.85, y: 0.99, z: 1.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 11917767191995335}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &47958646510736669
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1654160748451572352}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2471526072778169737
 GameObject:
   m_ObjectHideFlags: 0
@@ -1162,7 +1215,7 @@ GameObject:
   - component: {fileID: 4216416796049135816}
   - component: {fileID: 5731697314155051899}
   - component: {fileID: 5018340218712526899}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: pCylinder18
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1245,7 +1298,7 @@ GameObject:
   - component: {fileID: 760990313136420546}
   - component: {fileID: 7570279072859591480}
   - component: {fileID: 6485861652268429611}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: pCylinder19
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1328,7 +1381,7 @@ GameObject:
   - component: {fileID: 3142382787633836464}
   - component: {fileID: 9140106143792793363}
   - component: {fileID: 8263801493537337016}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: piston_LP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1411,7 +1464,7 @@ GameObject:
   - component: {fileID: 4771848945335785485}
   - component: {fileID: 4711976294503293515}
   - component: {fileID: 992967064206070861}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: polySurface125
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1494,7 +1547,7 @@ GameObject:
   - component: {fileID: 1470695486677008815}
   - component: {fileID: 6630699131901448640}
   - component: {fileID: 1328345126844967681}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1577,7 +1630,7 @@ GameObject:
   - component: {fileID: 778108533208553909}
   - component: {fileID: 8500901083055738444}
   - component: {fileID: 2867775673823597242}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: polySurface101
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1660,7 +1713,7 @@ GameObject:
   - component: {fileID: 11917767191995335}
   - component: {fileID: 7663963385318515573}
   - component: {fileID: 1987229365687062127}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: waterRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1692,6 +1745,10 @@ Transform:
   - {fileID: 6289042689991632479}
   - {fileID: 3822876011833290161}
   - {fileID: 8939933971158948678}
+  - {fileID: 8444710039227639092}
+  - {fileID: 8571684531595979256}
+  - {fileID: 5829814142455417007}
+  - {fileID: 9205941203966214880}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7663963385318515573
@@ -1711,6 +1768,11 @@ MonoBehaviour:
   baseWaterAmount: 1
   baseMaterialAmount: 0
   roomName: Water room
+  spots:
+  - {fileID: 8444710039227639092}
+  - {fileID: 8571684531595979256}
+  - {fileID: 5829814142455417007}
+  - {fileID: 9205941203966214880}
 --- !u!65 &1987229365687062127
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1727,7 +1789,7 @@ BoxCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
-  m_ProvidesContacts: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 12.685524, y: 6.6188326, z: 13.485519}
@@ -1744,7 +1806,7 @@ GameObject:
   - component: {fileID: 3939810131320828154}
   - component: {fileID: 8848511084966771244}
   - component: {fileID: 2531926819204733946}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: water tank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1846,7 +1908,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7903591668615101388}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Water Pump
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1893,7 +1955,7 @@ GameObject:
   - component: {fileID: 2702305121565948226}
   - component: {fileID: 7737229342492917560}
   - component: {fileID: 5189350928245458247}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: pDisc5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1974,7 +2036,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3822876011833290161}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: rorkroll (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1998,6 +2060,59 @@ Transform:
   - {fileID: 8698701538803682577}
   m_Father: {fileID: 11917767191995335}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!1 &4699028014839003756
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9205941203966214880}
+  - component: {fileID: 478621401795569667}
+  m_Layer: 7
+  m_Name: Spot (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9205941203966214880
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4699028014839003756}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.85, y: 0.99, z: -4.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 11917767191995335}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &478621401795569667
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4699028014839003756}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4802635766074536702
 GameObject:
   m_ObjectHideFlags: 0
@@ -2009,7 +2124,7 @@ GameObject:
   - component: {fileID: 7092015671207820952}
   - component: {fileID: 8507851139771697974}
   - component: {fileID: 5088298378252897951}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: polySurface103
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2092,7 +2207,7 @@ GameObject:
   - component: {fileID: 2488123549729131752}
   - component: {fileID: 322551242811364012}
   - component: {fileID: 7422227234742294684}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: pCube10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2173,7 +2288,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 786366348054530346}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: prop 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2215,7 +2330,7 @@ GameObject:
   - component: {fileID: 5757782186753302653}
   - component: {fileID: 1162885000955864184}
   - component: {fileID: 3859488601440417259}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Doorframe.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2298,7 +2413,7 @@ GameObject:
   - component: {fileID: 504668195706311269}
   - component: {fileID: 8105734299850936788}
   - component: {fileID: 5969664258093785607}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: polySurface110
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2381,7 +2496,7 @@ GameObject:
   - component: {fileID: 7979349337372502290}
   - component: {fileID: 9107944855470357532}
   - component: {fileID: 2064894021152591379}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: polySurface106
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2464,7 +2579,7 @@ GameObject:
   - component: {fileID: 8698701538803682577}
   - component: {fileID: 4949029341394612089}
   - component: {fileID: 4848302401228004645}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2548,7 +2663,7 @@ GameObject:
   - component: {fileID: 3795839346433948419}
   - component: {fileID: 4040907368865535546}
   - component: {fileID: 235831925802603941}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: polySurface107
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2652,7 +2767,7 @@ GameObject:
   - component: {fileID: 1910131745072257801}
   - component: {fileID: 437240264924754516}
   - component: {fileID: 6623230803909757940}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: polySurface112
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2735,7 +2850,7 @@ GameObject:
   - component: {fileID: 3326926537632142591}
   - component: {fileID: 8606573255486465327}
   - component: {fileID: 5191752700718399424}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: boltBase_LP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2807,6 +2922,59 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &6549553817670606898
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5829814142455417007}
+  - component: {fileID: 6089608777105200825}
+  m_Layer: 7
+  m_Name: Spot (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5829814142455417007
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6549553817670606898}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.85, y: 0.99, z: -0.45}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 11917767191995335}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6089608777105200825
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6549553817670606898}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6620814754630101805
 GameObject:
   m_ObjectHideFlags: 0
@@ -2818,7 +2986,7 @@ GameObject:
   - component: {fileID: 1761011785182811886}
   - component: {fileID: 4103481738107901910}
   - component: {fileID: 6063146595689385400}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: boltBase_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2901,7 +3069,7 @@ GameObject:
   - component: {fileID: 3207027708572204332}
   - component: {fileID: 3686662856713006998}
   - component: {fileID: 8940998268865737406}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: lever_LP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2986,7 +3154,7 @@ GameObject:
   - component: {fileID: 1734297159470119246}
   - component: {fileID: 109069583458183031}
   - component: {fileID: 4783212790855927483}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Doorframe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3058,6 +3226,59 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8082325771846202989
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8444710039227639092}
+  - component: {fileID: 5070657501970898265}
+  m_Layer: 7
+  m_Name: Spot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8444710039227639092
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8082325771846202989}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.75, y: 0.99, z: 4.84}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 11917767191995335}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5070657501970898265
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8082325771846202989}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8187212340854890111
 GameObject:
   m_ObjectHideFlags: 0
@@ -3069,7 +3290,7 @@ GameObject:
   - component: {fileID: 2399627574841400496}
   - component: {fileID: 4661051139901666653}
   - component: {fileID: 5315879532785978129}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: boltTop_LP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3153,7 +3374,7 @@ GameObject:
   - component: {fileID: 2708974690861300879}
   - component: {fileID: 185417796382511759}
   - component: {fileID: 335326395835825739}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3258,7 +3479,7 @@ GameObject:
   - component: {fileID: 6344412418288274898}
   - component: {fileID: 96233160703880156}
   - component: {fileID: 4096320166572793704}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: polySurface105
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3341,7 +3562,7 @@ GameObject:
   - component: {fileID: 8444187630935524272}
   - component: {fileID: 8387326791811668430}
   - component: {fileID: 8220909391497097528}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: polySurface109
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3424,7 +3645,7 @@ GameObject:
   - component: {fileID: 7839570151061920715}
   - component: {fileID: 7505827864886116567}
   - component: {fileID: 6792190423155928692}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: welds_LP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3507,7 +3728,7 @@ GameObject:
   - component: {fileID: 6444853464440926743}
   - component: {fileID: 2194658646343124507}
   - component: {fileID: 7379474851833646423}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

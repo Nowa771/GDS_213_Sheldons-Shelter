@@ -40,7 +40,7 @@ public class CharacterInfoDisplay : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(1)) // mouse button clicked
+        if (Input.GetMouseButtonDown(0)) // mouse button clicked
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit))
