@@ -18,6 +18,7 @@ public class CharacterMovement : MonoBehaviour
 
     void Update()
     {
+<<<<<<< HEAD
         if (isSelected && Input.GetMouseButtonDown(1)) // Right mouse button clicked
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -36,10 +37,24 @@ public class CharacterMovement : MonoBehaviour
             navMeshAgent.SetDestination(assignedSpot.position);
         }
 
+=======
+>>>>>>> new-character-movement
         float speed = navMeshAgent.velocity.magnitude;
         animator.SetFloat("Speed", speed);
     }
 
+<<<<<<< HEAD
+=======
+    private void OnDrawGizmos()
+    {
+        if (assignedSpot != null)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(assignedSpot.position, 1);
+        }
+    }
+
+>>>>>>> new-character-movement
     public void Select()
     {
         isSelected = true;
@@ -55,8 +70,13 @@ public class CharacterMovement : MonoBehaviour
         Transform spot = room.GetAvailableSpot();
         if (spot != null)
         {
+<<<<<<< HEAD
             navMeshAgent.SetDestination(spot.position);
             assignedSpot = spot;
+=======
+            assignedSpot = spot;
+            navMeshAgent.SetDestination(assignedSpot.position);
+>>>>>>> new-character-movement
         }
         else
         {
@@ -64,8 +84,19 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
+<<<<<<< HEAD
     public void ClearAssignedSpot()
     {
         assignedSpot = null;
+=======
+    public void SetAssignedSpot(Transform spot)
+    {
+        assignedSpot = spot;
+    }
+
+    public Transform GetAssignedSpot()
+    {
+        return assignedSpot;
+>>>>>>> new-character-movement
     }
 }

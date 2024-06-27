@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a7200c8d29619df468a4e317542a7c08, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 35.32154
+      value: 36.19
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a7200c8d29619df468a4e317542a7c08, type: 3}
       propertyPath: m_LocalPosition.y
@@ -477,6 +477,12 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.30215907
+<<<<<<< HEAD
   m_Height: 1.9328351
   m_Direction: 1
   m_Center: {x: -0.115112305, y: 0.8974278, z: 0.082728624}
+=======
+  m_Height: 1.8770003
+  m_Direction: 1
+  m_Center: {x: -0.115112305, y: 0.9253452, z: 0.082728624}
+>>>>>>> new-character-movement
