@@ -9,19 +9,24 @@ public class Room : MonoBehaviour
     public int baseWaterAmount = 1;
     public int baseMaterialAmount = 1;
     public string roomName = "Default Room";
-    public Transform[] spots;
 
+    public Transform[] spots; // Array of spots in the room
+    private List<Transform> availableSpots;
     private List<Transform> occupiedSpots = new List<Transform>();
+
+    private int peopleInRoom = 0;
+
+    private void Start()
+    {
+        availableSpots = new List<Transform>(spots); // Initialize available spots
+        StartCoroutine(AddResourcesOverTime());
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            CharacterMovement character = other.GetComponent<CharacterMovement>();
-            if (character != null && character.GetAssignedSpot() != null)
-            {
-                occupiedSpots.Add(character.GetAssignedSpot());
-            }
+            peopleInRoom++;
         }
     }
 
@@ -29,18 +34,13 @@ public class Room : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            CharacterMovement character = other.GetComponent<CharacterMovement>();
-            if (character != null && character.GetAssignedSpot() != null)
+            CharacterMovement characterMovement = other.GetComponent<CharacterMovement>();
+            if (characterMovement != null)
             {
-                occupiedSpots.Remove(character.GetAssignedSpot());
-                character.SetAssignedSpot(null);
+                characterMovement.ClearAssignedSpot();
             }
+            peopleInRoom--;
         }
-    }
-
-    private void Start()
-    {
-        StartCoroutine(AddResourcesOverTime());
     }
 
     private IEnumerator AddResourcesOverTime()
@@ -48,11 +48,11 @@ public class Room : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(interval);
-            if (occupiedSpots.Count > 0)
+            if (peopleInRoom > 0)
             {
-                int foodAmount = baseFoodAmount * occupiedSpots.Count;
-                int waterAmount = baseWaterAmount * occupiedSpots.Count;
-                int materialAmount = baseMaterialAmount * occupiedSpots.Count;
+                int foodAmount = baseFoodAmount * peopleInRoom;
+                int waterAmount = baseWaterAmount * peopleInRoom;
+                int materialAmount = baseMaterialAmount * peopleInRoom;
 
                 Inventory.Instance.AddFood(foodAmount); // food amount
                 Inventory.Instance.AddWater(waterAmount); // water amount
@@ -79,13 +79,22 @@ public class Room : MonoBehaviour
 
     public Transform GetAvailableSpot()
     {
-        foreach (Transform spot in spots)
+        if (availableSpots.Count > 0)
         {
-            if (!occupiedSpots.Contains(spot))
-            {
-                return spot;
-            }
+            Transform spot = availableSpots[0];
+            availableSpots.RemoveAt(0);
+            occupiedSpots.Add(spot);
+            return spot;
         }
-        return null; // No available spot
+        return null; // No available spots
+    }
+
+    public void ReleaseSpot(Transform spot)
+    {
+        if (occupiedSpots.Contains(spot))
+        {
+            occupiedSpots.Remove(spot);
+            availableSpots.Add(spot);
+        }
     }
 }
