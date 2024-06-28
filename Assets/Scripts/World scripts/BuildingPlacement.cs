@@ -11,13 +11,16 @@ public class BuildingPlacement : MonoBehaviour
     public List<int> buildingCosts;
     public GridSystem gridSystem;
     public GameObject selectionPanel;
-    public Dropdown buildingDropdown;
+    public int initialSelectedIndex = 0; // Initial index of the selected building prefab
     public NavMeshSurface navMeshSurface;
+    public Button[] buildingButtons; // Array of UI buttons representing each building
+    public Button removeBuildingButton; // UI button for removing buildings
 
     private GameObject buildingPreview;
     private bool buildMode = false;
     private GameObject selectedBuildingPrefab;
     private int selectedBuildingCost;
+    private int selectedIndex = -1; // Currently selected building index
     private Dictionary<Vector2Int, GameObject> placedBuildings = new Dictionary<Vector2Int, GameObject>();
 
     [SerializeField]
@@ -26,15 +29,33 @@ public class BuildingPlacement : MonoBehaviour
     void Start()
     {
         selectionPanel.SetActive(false);
-        PopulateDropdown();
 
-        if (buildingPrefabs.Count > 0)
+        // Select initial building prefab
+        if (buildingPrefabs.Count > 0 && initialSelectedIndex >= 0 && initialSelectedIndex < buildingPrefabs.Count)
         {
-            selectedBuildingPrefab = buildingPrefabs[0];
-            selectedBuildingCost = buildingCosts[0];
+            SetSelectedBuilding(initialSelectedIndex);
+        }
+        else
+        {
+            Debug.LogWarning("Initial selected index is out of range or buildingPrefabs list is empty.");
         }
 
-        buildingDropdown.onValueChanged.AddListener(delegate { DropdownValueChanged(buildingDropdown); });
+        // Add listeners to building buttons
+        for (int i = 0; i < buildingButtons.Length; i++)
+        {
+            int index = i; // Capture index in the lambda function
+            buildingButtons[i].onClick.AddListener(() => SelectBuilding(index));
+        }
+
+        // Add listener to remove building button
+        if (removeBuildingButton != null)
+        {
+            removeBuildingButton.onClick.AddListener(RemoveBuildingButtonClicked);
+        }
+        else
+        {
+            Debug.LogWarning("Remove building button reference not set in the Inspector.");
+        }
     }
 
     void Update()
@@ -44,9 +65,9 @@ public class BuildingPlacement : MonoBehaviour
             ToggleBuildMode();
         }
 
-        if (buildMode)
+        if (buildMode && selectedBuildingPrefab != null)
         {
-            if (selectedBuildingPrefab != null)
+            if (buildingPreview != null)
             {
                 UpdateBuildingPlacement();
             }
@@ -61,7 +82,6 @@ public class BuildingPlacement : MonoBehaviour
     {
         buildMode = !buildMode;
         selectionPanel.SetActive(buildMode);
-        //Time.timeScale = buildMode ? 0 : 1;
 
         if (buildMode)
         {
@@ -138,7 +158,7 @@ public class BuildingPlacement : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not enough materials to place the building.");
+            Debug.Log("Not enough materials to place the building or the cell is not available.");
         }
     }
 
@@ -200,39 +220,55 @@ public class BuildingPlacement : MonoBehaviour
         y = Mathf.FloorToInt(localPosition.z / gridSystem.cellHeight);
     }
 
-    void PopulateDropdown()
+    // Method to select a building based on index
+    void SelectBuilding(int index)
     {
-        List<string> options = new List<string>();
-        options.Add("Remove Building"); // Add remove building option first
-        foreach (var prefab in buildingPrefabs)
+        if (index >= 0 && index < buildingPrefabs.Count)
         {
-            options.Add(prefab.name);
+            SetSelectedBuilding(index);
         }
-        buildingDropdown.ClearOptions();
-        buildingDropdown.AddOptions(options);
     }
 
-    void DropdownValueChanged(Dropdown change)
+    // Method to set the selected building prefab and cost
+    void SetSelectedBuilding(int index)
     {
-        int index = change.value;
-        if (index == 0) // If the first option "Remove Building" is selected
+        selectedBuildingPrefab = buildingPrefabs[index];
+        selectedBuildingCost = buildingCosts[index];
+        selectedIndex = index;
+
+        // Destroy any existing building preview
+        if (buildingPreview != null)
         {
-            selectedBuildingPrefab = null;
-            selectedBuildingCost = 0;
-            if (buildingPreview != null)
-            {
-                Destroy(buildingPreview);
-            }
+            Destroy(buildingPreview);
         }
-        else if (index > 0 && index <= buildingPrefabs.Count)
+
+        // Start placing the selected building
+        StartPlacingBuilding();
+    }
+
+    // Method called when remove building button is clicked
+    void RemoveBuildingButtonClicked()
+    {
+        Vector3 mousePosition = GetMouseWorldPosition();
+        int x, y;
+        GetGridPosition(mousePosition, out x, out y);
+        Vector2Int gridPos = new Vector2Int(x, y);
+
+        RemoveBuilding(gridPos);
+    }
+
+    // Method to remove building at a specific grid position
+    void RemoveBuilding(Vector2Int gridPos)
+    {
+        if (placedBuildings.ContainsKey(gridPos))
         {
-            selectedBuildingPrefab = buildingPrefabs[index - 1]; // Adjust index for 0-based list
-            selectedBuildingCost = buildingCosts[index - 1]; // Adjust index for 0-based list
-            if (buildingPreview != null)
-            {
-                Destroy(buildingPreview);
-                StartPlacingBuilding();
-            }
+            GameObject buildingToRemove = placedBuildings[gridPos];
+            Destroy(buildingToRemove);
+            placedBuildings.Remove(gridPos);
+            gridSystem.ClearCell(gridPos.x, gridPos.y);
+
+            // Trigger NavMesh baking after a delay
+            StartCoroutine(DelayedNavMeshBake());
         }
     }
 }

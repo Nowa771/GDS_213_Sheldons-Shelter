@@ -10,11 +10,13 @@ public class CharacterMovement : MonoBehaviour
     private bool isSelected = false;
     private Transform assignedSpot;
     private Room currentRoom;
+    private OutlineEffect outlineEffect; // Reference to outline effect script
 
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        outlineEffect = GetComponent<OutlineEffect>(); // Assuming OutlineEffect is attached to the same GameObject
 
         if (animator == null)
         {
@@ -66,6 +68,12 @@ public class CharacterMovement : MonoBehaviour
             {
                 Debug.LogError("Animator parameter 'Speed' does not exist.");
             }
+        }
+
+        // Ensure outline effect is applied if selected
+        if (outlineEffect != null)
+        {
+            outlineEffect.EnableOutline(isSelected);
         }
     }
 
@@ -125,3 +133,4 @@ public static class AnimatorExtensions
         return false;
     }
 }
+
