@@ -11,11 +11,14 @@ public class BuildingPlacement : MonoBehaviour
     public List<int> buildingCosts;
     public GridSystem gridSystem;
     public GameObject selectionPanel;
-    public Dropdown buildingDropdown;
+    public GameObject buildingButtonPrefab; // Prefab for building buttons
+    public Transform buttonContainer; // Parent object for the building buttons
     public NavMeshSurface navMeshSurface;
+    public Button closeButton; // Button to close the build menu
 
     private GameObject buildingPreview;
     private bool buildMode = false;
+    private bool removeMode = false; // New variable to track remove mode
     private GameObject selectedBuildingPrefab;
     private int selectedBuildingCost;
     private Dictionary<Vector2Int, GameObject> placedBuildings = new Dictionary<Vector2Int, GameObject>();
@@ -26,7 +29,7 @@ public class BuildingPlacement : MonoBehaviour
     void Start()
     {
         selectionPanel.SetActive(false);
-        PopulateDropdown();
+        PopulateBuildingButtons();
 
         if (buildingPrefabs.Count > 0)
         {
@@ -34,7 +37,7 @@ public class BuildingPlacement : MonoBehaviour
             selectedBuildingCost = buildingCosts[0];
         }
 
-        buildingDropdown.onValueChanged.AddListener(delegate { DropdownValueChanged(buildingDropdown); });
+        closeButton.onClick.AddListener(CloseBuildMenu);
     }
 
     void Update()
@@ -46,13 +49,13 @@ public class BuildingPlacement : MonoBehaviour
 
         if (buildMode)
         {
-            if (selectedBuildingPrefab != null)
+            if (removeMode)
             {
-                UpdateBuildingPlacement();
+                UpdateBuildingRemoval();
             }
             else
             {
-                UpdateBuildingRemoval();
+                UpdateBuildingPlacement();
             }
         }
     }
@@ -61,7 +64,6 @@ public class BuildingPlacement : MonoBehaviour
     {
         buildMode = !buildMode;
         selectionPanel.SetActive(buildMode);
-        //Time.timeScale = buildMode ? 0 : 1;
 
         if (buildMode)
         {
@@ -76,6 +78,18 @@ public class BuildingPlacement : MonoBehaviour
         }
     }
 
+    void CloseBuildMenu()
+    {
+        buildMode = false;
+        selectionPanel.SetActive(false);
+        removeMode = false;
+
+        if (buildingPreview != null)
+        {
+            Destroy(buildingPreview);
+        }
+    }
+
     void StartPlacingBuilding()
     {
         if (selectedBuildingPrefab != null)
@@ -87,7 +101,7 @@ public class BuildingPlacement : MonoBehaviour
 
     void UpdateBuildingPlacement()
     {
-        if (buildingPreview != null)
+        if (buildingPreview != null && !IsPointerOverUI())
         {
             UpdateBuildingPreviewPosition();
             if (Input.GetMouseButtonDown(0))
@@ -144,7 +158,7 @@ public class BuildingPlacement : MonoBehaviour
 
     void UpdateBuildingRemoval()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !IsPointerOverUI())
         {
             RemoveBuilding();
         }
@@ -200,39 +214,61 @@ public class BuildingPlacement : MonoBehaviour
         y = Mathf.FloorToInt(localPosition.z / gridSystem.cellHeight);
     }
 
-    void PopulateDropdown()
+    void PopulateBuildingButtons()
     {
-        List<string> options = new List<string>();
-        options.Add("Remove Building"); // Add remove building option first
-        foreach (var prefab in buildingPrefabs)
+        foreach (Transform child in buttonContainer)
         {
-            options.Add(prefab.name);
+            Destroy(child.gameObject); // Clear existing buttons
         }
-        buildingDropdown.ClearOptions();
-        buildingDropdown.AddOptions(options);
+
+        // Add a button for removing buildings first
+        GameObject removeButtonObj = Instantiate(buildingButtonPrefab, buttonContainer);
+        Button removeButton = removeButtonObj.GetComponent<Button>();
+        removeButton.onClick.AddListener(OnRemoveButtonClicked);
+
+        Text removeButtonText = removeButtonObj.GetComponentInChildren<Text>();
+        removeButtonText.text = "Remove Building";
+
+        for (int i = 0; i < buildingPrefabs.Count; i++)
+        {
+            GameObject buttonObj = Instantiate(buildingButtonPrefab, buttonContainer);
+            Button button = buttonObj.GetComponent<Button>();
+            int index = i; // Capture the current value of i
+
+            button.onClick.AddListener(() => OnBuildingButtonClicked(index));
+
+            Text buttonText = buttonObj.GetComponentInChildren<Text>();
+            buttonText.text = buildingPrefabs[index].name;
+        }
     }
 
-    void DropdownValueChanged(Dropdown change)
+    void OnBuildingButtonClicked(int index)
     {
-        int index = change.value;
-        if (index == 0) // If the first option "Remove Building" is selected
+        removeMode = false;
+        selectedBuildingPrefab = buildingPrefabs[index];
+        selectedBuildingCost = buildingCosts[index];
+
+        if (buildingPreview != null)
         {
-            selectedBuildingPrefab = null;
-            selectedBuildingCost = 0;
-            if (buildingPreview != null)
-            {
-                Destroy(buildingPreview);
-            }
+            Destroy(buildingPreview);
         }
-        else if (index > 0 && index <= buildingPrefabs.Count)
+        StartPlacingBuilding(); // Always start placing the building again
+    }
+
+    void OnRemoveButtonClicked()
+    {
+        removeMode = true;
+        selectedBuildingPrefab = null;
+        selectedBuildingCost = 0;
+
+        if (buildingPreview != null)
         {
-            selectedBuildingPrefab = buildingPrefabs[index - 1]; // Adjust index for 0-based list
-            selectedBuildingCost = buildingCosts[index - 1]; // Adjust index for 0-based list
-            if (buildingPreview != null)
-            {
-                Destroy(buildingPreview);
-                StartPlacingBuilding();
-            }
+            Destroy(buildingPreview);
         }
+    }
+
+    bool IsPointerOverUI()
+    {
+        return UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject();
     }
 }
