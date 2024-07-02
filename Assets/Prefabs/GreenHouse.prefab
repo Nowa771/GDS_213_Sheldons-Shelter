@@ -1699,6 +1699,7 @@ GameObject:
   - component: {fileID: 3963655455870915537}
   - component: {fileID: 2614607326118587601}
   - component: {fileID: 4384462380394996943}
+  - component: {fileID: 1746190578667781084}
   m_Layer: 7
   m_Name: GreenHouse
   m_TagString: Untagged
@@ -1807,8 +1808,29 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.9312744, y: 6.6791534, z: 12.934769}
-  m_Center: {x: -0.4656372, y: 2.8395767, z: -0.1458664}
+  m_Size: {x: 11.289824, y: 0.4624691, z: 12.934769}
+  m_Center: {x: -5.144912, y: 0.36119652, z: -0.1458664}
+--- !u!65 &1746190578667781084
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7133895260857713804}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.9921608, y: 6.63319, z: 12.551252}
+  m_Center: {x: 0.0039196014, y: 2.816595, z: 0.11913967}
 --- !u!1 &7591715416164401029
 GameObject:
   m_ObjectHideFlags: 0
