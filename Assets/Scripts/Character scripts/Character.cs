@@ -25,9 +25,6 @@ public class Character : MonoBehaviour
 
     private string[] possibleNames = new string[] { "Alex", "Jordan", "Taylor", "Morgan", "Charlie", "Casey", "Drew", "Riley", "Skyler", "Parker" };
 
-    // New productivity field
-    public float productivity;
-
     void Start()
     {
         characterName = GenerateRandomName();
@@ -38,8 +35,6 @@ public class Character : MonoBehaviour
         health = maxHealth;
 
         audioSource = gameObject.AddComponent<AudioSource>();
-
-        productivity = Random.Range(0f, 200f); // productivity percentage 
     }
 
     void Update()
@@ -84,7 +79,7 @@ public class Character : MonoBehaviour
     IEnumerator DisappearAfterSound()
     {
         yield return new WaitForSeconds(deathSound.length);
-        gameObject.SetActive(false);
+        gameObject.SetActive(false); // Makes the character disappear
     }
 
     public void TryToEat()
@@ -127,10 +122,5 @@ public class Character : MonoBehaviour
     {
         int index = Random.Range(0, possibleNames.Length);
         return possibleNames[index];
-    }
-
-    public float GetProductivity()
-    {
-        return productivity;
     }
 }

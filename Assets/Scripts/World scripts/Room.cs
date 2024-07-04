@@ -13,25 +13,20 @@ public class Room : MonoBehaviour
     public Transform[] spots; // Array of spots in the room
     private List<Transform> availableSpots;
     private List<Transform> occupiedSpots = new List<Transform>();
-    private List<Character> charactersInRoom = new List<Character>(); // List to store characters in the room
+
+    private int peopleInRoom = 0;
 
     private void Start()
     {
         availableSpots = new List<Transform>(spots); // Initialize available spots
         StartCoroutine(AddResourcesOverTime());
-        Debug.Log("Room started and resource coroutine initiated.");
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            Character character = other.GetComponent<Character>();
-            if (character != null)
-            {
-                charactersInRoom.Add(character);
-                Debug.Log($"Character {character.characterName} entered the room. Productivity: {character.productivity}%");
-            }
+            peopleInRoom++;
         }
     }
 
@@ -39,17 +34,12 @@ public class Room : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Character character = other.GetComponent<Character>();
-            if (character != null)
-            {
-                charactersInRoom.Remove(character);
-                Debug.Log($"Character {character.characterName} left the room.");
-            }
             CharacterMovement characterMovement = other.GetComponent<CharacterMovement>();
             if (characterMovement != null)
             {
                 characterMovement.ClearAssignedSpot();
             }
+            peopleInRoom--;
         }
     }
 
@@ -58,29 +48,33 @@ public class Room : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(interval);
-            if (charactersInRoom.Count > 0)
+            if (peopleInRoom > 0)
             {
-                int totalFoodAmount = 0;
-                int totalWaterAmount = 0;
-                int totalMaterialAmount = 0;
+                int foodAmount = baseFoodAmount * peopleInRoom;
+                int waterAmount = baseWaterAmount * peopleInRoom;
+                int materialAmount = baseMaterialAmount * peopleInRoom;
 
-                foreach (Character character in charactersInRoom)
-                {
-                    float productivityMultiplier = character.productivity / 100f;
-                    totalFoodAmount += Mathf.RoundToInt(baseFoodAmount * productivityMultiplier);
-                    totalWaterAmount += Mathf.RoundToInt(baseWaterAmount * productivityMultiplier);
-                    totalMaterialAmount += Mathf.RoundToInt(baseMaterialAmount * productivityMultiplier);
+                Inventory.Instance.AddFood(foodAmount); // food amount
+                Inventory.Instance.AddWater(waterAmount); // water amount
+                Inventory.Instance.AddMaterials(materialAmount); // material amount
 
-                    Debug.Log($"Character {character.characterName} with productivity {character.productivity}% contributes: Food {Mathf.RoundToInt(baseFoodAmount * productivityMultiplier)}, Water {Mathf.RoundToInt(baseWaterAmount * productivityMultiplier)}, Materials {Mathf.RoundToInt(baseMaterialAmount * productivityMultiplier)}");
-                }
-
-                Inventory.Instance.AddFood(totalFoodAmount); // Add food amount
-                Inventory.Instance.AddWater(totalWaterAmount); // Add water amount
-                Inventory.Instance.AddMaterials(totalMaterialAmount); // Add material amount
-
-                Debug.Log($"Total resources added to inventory: Food {totalFoodAmount}, Water {totalWaterAmount}, Materials {totalMaterialAmount}");
+                Debug.Log($"Resources added to inventory: Food {foodAmount}, Water {waterAmount}, Materials {materialAmount}");
             }
         }
+    }
+
+    private void OnMouseDown()
+    {
+        RoomSelectionManager.Instance.ShowRoomStats(this);
+    }
+
+    public string GetRoomStats()
+    {
+        return $"{roomName}\n" +
+               $"Produces:\n" +
+               $"- Food: {baseFoodAmount} per person per {interval} seconds\n" +
+               $"- Water: {baseWaterAmount} per person per {interval} seconds\n" +
+               $"- Materials: {baseMaterialAmount} per person per {interval} seconds";
     }
 
     public Transform GetAvailableSpot()
