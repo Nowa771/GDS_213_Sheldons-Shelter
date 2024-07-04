@@ -367,6 +367,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a7200c8d29619df468a4e317542a7c08, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2273306503478105982}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a7200c8d29619df468a4e317542a7c08, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6516857329500620164}
   m_SourcePrefab: {fileID: 100100000, guid: a7200c8d29619df468a4e317542a7c08, type: 3}
 --- !u!1 &741280708721205297 stripped
 GameObject:
@@ -386,16 +389,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: 
-  hunger: 99
-  thirst: 99
-  health: 99
-  hungerDecayRate: 0.5
-  thirstDecayRate: 0.5
+  hunger: 200
+  thirst: 200
+  health: 100
+  hungerDecayRate: 1
+  thirstDecayRate: 1.5
   healthDecayRate: 1
-  maxHunger: 99
-  maxThirst: 99
-  maxHealth: 99
+  maxHunger: 200
+  maxThirst: 200
+  maxHealth: 100
   deathSound: {fileID: 8300000, guid: a0a35b4dd99eac746b9fb0e1a0c37a31, type: 3}
+  productivity: 0
 --- !u!114 &6857151216305425084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -480,3 +484,16 @@ CapsuleCollider:
   m_Height: 1.8770003
   m_Direction: 1
   m_Center: {x: -0.115112305, y: 0.9253452, z: 0.082728624}
+--- !u!114 &6516857329500620164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741280708721205297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74a3d38725051cf41a385df9fd0b450b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMaterial: {fileID: 2100000, guid: dd77ac15d91e5d04d8b9e14b36dc8b19, type: 2}
