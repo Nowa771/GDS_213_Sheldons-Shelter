@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RoomSelectionManager : MonoBehaviour
+/*public class RoomSelectionManager : MonoBehaviour
 {
     public static RoomSelectionManager Instance;
 
@@ -52,4 +52,4 @@ public class RoomSelectionManager : MonoBehaviour
             roomStatsPanel.SetActive(false);
         }
     }
-}
+} */

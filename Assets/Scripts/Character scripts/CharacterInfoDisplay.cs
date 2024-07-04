@@ -9,6 +9,7 @@ public class CharacterInfoDisplay : MonoBehaviour
     public Text hungerText;
     public Text thirstText;
     public Text healthText;
+    public Text productivityText; // New text field for productivity
     public GameObject infoPanel;
     public Button eatButton;
     public Button drinkButton;
@@ -89,12 +90,13 @@ public class CharacterInfoDisplay : MonoBehaviour
 
     void UpdateCharacterInfo()
     {
-        if (nameText != null && hungerText != null && thirstText != null && healthText != null && selectedCharacter != null)
+        if (nameText != null && hungerText != null && thirstText != null && healthText != null && productivityText != null && selectedCharacter != null)
         {
             nameText.text = "Name: " + selectedCharacter.characterName;
-            hungerText.text = "Hunger: " + selectedCharacter.hunger.ToString("F2"); // hunger value
-            thirstText.text = "Thirst: " + selectedCharacter.thirst.ToString("F2"); // thirst value
-            healthText.text = "Health: " + selectedCharacter.health.ToString("F2"); // health value
+            hungerText.text = "Hunger: " + Mathf.Min(Mathf.RoundToInt((selectedCharacter.hunger / selectedCharacter.maxHunger) * 100), 100).ToString() + "%"; // hunger percentage
+            thirstText.text = "Thirst: " + Mathf.Min(Mathf.RoundToInt((selectedCharacter.thirst / selectedCharacter.maxThirst) * 100), 100).ToString() + "%"; // thirst percentage
+            healthText.text = "Health: " + Mathf.RoundToInt((selectedCharacter.health / selectedCharacter.maxHealth) * 100).ToString() + "%"; // health percentage
+            productivityText.text = "Productivity: " + Mathf.RoundToInt(selectedCharacter.productivity).ToString() + "%"; // productivity percentage
         }
     }
 
