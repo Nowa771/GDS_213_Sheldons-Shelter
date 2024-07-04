@@ -1713,6 +1713,7 @@ GameObject:
   - component: {fileID: 11917767191995335}
   - component: {fileID: 7663963385318515573}
   - component: {fileID: 1987229365687062127}
+  - component: {fileID: 9150844751600397522}
   m_Layer: 7
   m_Name: waterRoomBad
   m_TagString: Untagged
@@ -1794,6 +1795,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.1481934, y: 6.6188326, z: 13.485519}
   m_Center: {x: -1.0740967, y: 2.8094163, z: -0.05091858}
+--- !u!65 &9150844751600397522
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3479962528301662347}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 12.444696, y: 0.67199004, z: 13.18898}
+  m_Center: {x: -5.722348, y: 0.28843433, z: -0.07387924}
 --- !u!1 &3739077128448029381
 GameObject:
   m_ObjectHideFlags: 0
