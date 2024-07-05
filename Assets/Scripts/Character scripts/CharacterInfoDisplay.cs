@@ -49,6 +49,7 @@ public class CharacterInfoDisplay : MonoBehaviour
                 Character character = hit.collider.GetComponent<Character>();
                 if (character != null)
                 {
+                    Debug.Log("Character clicked: " + character.characterName);
                     if (selectedCharacter == character && infoPanel.activeSelf)
                     {
                         if (!RectTransformUtility.RectangleContainsScreenPoint(eatButton.GetComponent<RectTransform>(), Input.mousePosition))
@@ -70,8 +71,10 @@ public class CharacterInfoDisplay : MonoBehaviour
         }
     }
 
-    void SelectCharacter(Character character)
+    public void SelectCharacter(Character character)
     {
+        Debug.Log("SelectCharacter called in CharacterInfoDisplay");
+
         if (selectedCharacter != null)
         {
             selectedCharacter.GetComponent<CharacterMovement>().Deselect();

@@ -70,7 +70,7 @@ public class CharacterMovement : MonoBehaviour
             }
         }
 
-        // Ensure outline effect is applied if selected
+        // Ensure outline effect is applied
         if (outlineEffect != null)
         {
             outlineEffect.EnableOutline(isSelected);
@@ -80,11 +80,18 @@ public class CharacterMovement : MonoBehaviour
     public void Select()
     {
         isSelected = true;
+        Debug.Log(gameObject.name + " selected");
     }
 
     public void Deselect()
     {
         isSelected = false;
+        Debug.Log(gameObject.name + " deselected");
+    }
+
+    public bool IsSelected()
+    {
+        return isSelected;
     }
 
     public void MoveToRoom(Room room)
@@ -133,4 +140,3 @@ public static class AnimatorExtensions
         return false;
     }
 }
-

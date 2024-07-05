@@ -5,6 +5,7 @@ using UnityEngine;
 public class CharacterManager : MonoBehaviour
 {
     public List<Character> characters;
+    public CharacterInfoDisplay characterInfoDisplay; // Reference to CharacterInfoDisplay
 
     // Threshold values for automatic eating and drinking
     public float hungerThreshold = 20.0f;
@@ -17,12 +18,19 @@ public class CharacterManager : MonoBehaviour
     private Dictionary<Character, float> lastEatTimes = new Dictionary<Character, float>();
     private Dictionary<Character, float> lastDrinkTimes = new Dictionary<Character, float>();
 
+    private int currentIndex = 0;
+
     void Start()
     {
         foreach (Character character in characters)
         {
             lastEatTimes[character] = Time.time;
             lastDrinkTimes[character] = Time.time;
+        }
+
+        if (characters.Count > 0)
+        {
+            SelectCharacter(currentIndex);
         }
     }
 
@@ -31,6 +39,15 @@ public class CharacterManager : MonoBehaviour
         foreach (Character character in characters)
         {
             CheckCharacterNeeds(character);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            SelectPreviousCharacter();
+        }
+        else if (Input.GetKeyDown(KeyCode.E))
+        {
+            SelectNextCharacter();
         }
     }
 
@@ -57,5 +74,32 @@ public class CharacterManager : MonoBehaviour
             character.TryToDrink();
             lastDrinkTimes[character] = Time.time;
         }
+    }
+
+    void SelectCharacter(int index)
+    {
+        if (characters.Count > 0 && index >= 0 && index < characters.Count)
+        {
+            if (characters[currentIndex] != null)
+            {
+                characters[currentIndex].GetComponent<CharacterMovement>().Deselect();
+            }
+
+            currentIndex = index;
+            characters[currentIndex].GetComponent<CharacterMovement>().Select();
+            characterInfoDisplay.SelectCharacter(characters[currentIndex]); // Notify CharacterInfoDisplay
+        }
+    }
+
+    void SelectPreviousCharacter()
+    {
+        int previousIndex = (currentIndex - 1 + characters.Count) % characters.Count;
+        SelectCharacter(previousIndex);
+    }
+
+    void SelectNextCharacter()
+    {
+        int nextIndex = (currentIndex + 1) % characters.Count;
+        SelectCharacter(nextIndex);
     }
 }
