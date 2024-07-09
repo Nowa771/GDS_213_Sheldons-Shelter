@@ -5021,13 +5021,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ch42_nonPBR (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8337973558426180897, guid: 8e762fd5531692c43a32695a48ebf980, type: 3}
+      propertyPath: healthDecayRate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8337973558426180897, guid: 8e762fd5531692c43a32695a48ebf980, type: 3}
+      propertyPath: hungerDecayRate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8337973558426180897, guid: 8e762fd5531692c43a32695a48ebf980, type: 3}
+      propertyPath: thirstDecayRate
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 741280708721205297, guid: 8e762fd5531692c43a32695a48ebf980, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1990274437}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e762fd5531692c43a32695a48ebf980, type: 3}
 --- !u!1 &1755985949
 GameObject:
@@ -5816,30 +5825,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1990274436 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 741280708721205297, guid: 8e762fd5531692c43a32695a48ebf980, type: 3}
-  m_PrefabInstance: {fileID: 1726669640}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1990274437
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1990274436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74a3d38725051cf41a385df9fd0b450b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMaterial: {fileID: 2100000, guid: dd77ac15d91e5d04d8b9e14b36dc8b19, type: 2}
 --- !u!114 &1990274443 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8337973558426180897, guid: 8e762fd5531692c43a32695a48ebf980, type: 3}
   m_PrefabInstance: {fileID: 1726669640}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1990274436}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f8aae095d56c6e45872cbcb181f86bd, type: 3}
@@ -6499,6 +6490,14 @@ PrefabInstance:
     - target: {fileID: 741280708721205297, guid: 8e762fd5531692c43a32695a48ebf980, type: 3}
       propertyPath: m_Name
       value: Ch42_nonPBR
+      objectReference: {fileID: 0}
+    - target: {fileID: 8337973558426180897, guid: 8e762fd5531692c43a32695a48ebf980, type: 3}
+      propertyPath: hungerDecayRate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8337973558426180897, guid: 8e762fd5531692c43a32695a48ebf980, type: 3}
+      propertyPath: thirstDecayRate
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

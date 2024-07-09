@@ -8,8 +8,8 @@ public class Character : MonoBehaviour
     public float hunger;
     public float thirst;
     public float health;
-    public float hungerDecayRate = 1f;
-    public float thirstDecayRate = 1f;
+    public float baseHungerDecayRate = 1f;  // Base decay rate
+    public float baseThirstDecayRate = 1f;  // Base decay rate
     public float healthDecayRate = 1f;
 
     public float maxHunger = 100f;
@@ -28,6 +28,10 @@ public class Character : MonoBehaviour
     // New productivity field
     public float productivity;
 
+    // Adjusted decay rates
+    private float hungerDecayRate;
+    private float thirstDecayRate;
+
     void Start()
     {
         characterName = GenerateRandomName();
@@ -40,6 +44,11 @@ public class Character : MonoBehaviour
         audioSource = gameObject.AddComponent<AudioSource>();
 
         productivity = Random.Range(0f, 200f); // productivity percentage 
+
+        // Calculate adjusted decay rates based on productivity
+        float productivityFactor = productivity / 100f;
+        hungerDecayRate = baseHungerDecayRate * productivityFactor;
+        thirstDecayRate = baseThirstDecayRate * productivityFactor;
     }
 
     void Update()
