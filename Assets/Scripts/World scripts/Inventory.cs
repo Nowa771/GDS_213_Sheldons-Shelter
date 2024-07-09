@@ -9,11 +9,19 @@ public class Inventory : MonoBehaviour
 
     public int foodCount;
     public int waterCount;
-    public int materialCount; // New resource for materials
+    public int materialCount;
 
-    public Text foodText;
-    public Text waterText;
-    public Text materialText; // Text component for materials
+    public int maxFoodCount = 100;
+    public int maxWaterCount = 100;   
+    public int maxMaterialCount = 100; // Maximum limits
+
+    public RawImage foodImage;
+    public RawImage waterImage;
+    public RawImage materialImage;
+
+    public Text foodCountText;
+    public Text waterCountText;
+    public Text materialCountText;
 
     private void Awake()
     {
@@ -34,7 +42,7 @@ public class Inventory : MonoBehaviour
 
     public void AddFood(int amount)
     {
-        foodCount += amount;
+        foodCount = Mathf.Min(foodCount + amount, maxFoodCount);
         UpdateUI();
     }
 
@@ -49,7 +57,7 @@ public class Inventory : MonoBehaviour
 
     public void AddWater(int amount)
     {
-        waterCount += amount;
+        waterCount = Mathf.Min(waterCount + amount, maxWaterCount);
         UpdateUI();
     }
 
@@ -64,7 +72,7 @@ public class Inventory : MonoBehaviour
 
     public void AddMaterials(int amount)
     {
-        materialCount += amount;
+        materialCount = Mathf.Min(materialCount + amount, maxMaterialCount);
         UpdateUI();
     }
 
@@ -94,8 +102,8 @@ public class Inventory : MonoBehaviour
 
     private void UpdateUI()
     {
-        foodText.text = "Food: " + foodCount;
-        waterText.text = "Water: " + waterCount;
-        materialText.text = "Materials: " + materialCount; // Update materials UI text
+        foodCountText.text = $"{foodCount} / {maxFoodCount}";
+        waterCountText.text = $"{waterCount} / {maxWaterCount}";
+        materialCountText.text = $"{materialCount} / {maxMaterialCount}";
     }
 }

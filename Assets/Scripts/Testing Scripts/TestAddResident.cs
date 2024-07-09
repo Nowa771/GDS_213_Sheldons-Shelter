@@ -7,6 +7,7 @@ public class TestAddResident : MonoBehaviour
     public GameObject residentPrefab;
     private Shelter shelter;
     public CharacterManager characterManager;
+
     void Start()
     {
         shelter = FindObjectOfType<Shelter>();
@@ -14,6 +15,12 @@ public class TestAddResident : MonoBehaviour
         if (shelter == null)
         {
             Debug.LogError("Shelter not found in the scene.");
+            return;
+        }
+
+        if (characterManager == null)
+        {
+            Debug.LogError("CharacterManager not assigned.");
             return;
         }
     }
@@ -33,7 +40,19 @@ public class TestAddResident : MonoBehaviour
             GameObject newResident = Instantiate(residentPrefab);
             bool added = shelter.AddResident(newResident);
 
-            if (!added)
+            if (added)
+            {
+                Character newCharacter = newResident.GetComponent<Character>();
+                if (newCharacter != null)
+                {
+                    characterManager.AddCharacter(newCharacter);
+                }
+                else
+                {
+                    Debug.LogError("New resident does not have a Character component.");
+                }
+            }
+            else
             {
                 Destroy(newResident);
             }
