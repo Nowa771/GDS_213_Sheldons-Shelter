@@ -10,18 +10,22 @@ public class Inventory : MonoBehaviour
     public int foodCount;
     public int waterCount;
     public int materialCount;
+    public int medpackCount; // count
 
     public int maxFoodCount = 100;
-    public int maxWaterCount = 100;   
-    public int maxMaterialCount = 100; // Maximum limits
+    public int maxWaterCount = 100;
+    public int maxMaterialCount = 100;
+    public int maxMedpackCount = 50; // Maximum limits
 
     public RawImage foodImage;
     public RawImage waterImage;
     public RawImage materialImage;
+    public RawImage medpackImage; //image
 
     public Text foodCountText;
     public Text waterCountText;
     public Text materialCountText;
+    public Text medpackCountText; // count text
 
     private void Awake()
     {
@@ -85,6 +89,21 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    public void AddMedpacks(int amount)
+    {
+        medpackCount = Mathf.Min(medpackCount + amount, maxMedpackCount);
+        UpdateUI();
+    }
+
+    public void RemoveMedpacks(int amount)
+    {
+        if (medpackCount >= amount)
+        {
+            medpackCount -= amount;
+            UpdateUI();
+        }
+    }
+
     public bool HasFood(int amount)
     {
         return foodCount >= amount;
@@ -100,10 +119,16 @@ public class Inventory : MonoBehaviour
         return materialCount >= amount;
     }
 
+    public bool HasMedpacks(int amount)
+    {
+        return medpackCount >= amount;
+    }
+
     private void UpdateUI()
     {
         foodCountText.text = $"{foodCount} / {maxFoodCount}";
         waterCountText.text = $"{waterCount} / {maxWaterCount}";
         materialCountText.text = $"{materialCount} / {maxMaterialCount}";
+        medpackCountText.text = $"{medpackCount} / {maxMedpackCount}";
     }
 }

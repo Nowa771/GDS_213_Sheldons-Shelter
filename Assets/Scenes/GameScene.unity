@@ -3166,15 +3166,19 @@ MonoBehaviour:
   foodCount: 10
   waterCount: 10
   materialCount: 50
+  medpackCount: 0
   maxFoodCount: 100
   maxWaterCount: 100
   maxMaterialCount: 100
+  maxMedpackCount: 50
   foodImage: {fileID: 1777142685}
   waterImage: {fileID: 193834887}
   materialImage: {fileID: 1782678386}
+  medpackImage: {fileID: 0}
   foodCountText: {fileID: 139113919}
   waterCountText: {fileID: 1882043007}
   materialCountText: {fileID: 1676802596}
+  medpackCountText: {fileID: 0}
 --- !u!4 &1050170176
 Transform:
   m_ObjectHideFlags: 0

@@ -8,16 +8,17 @@ public class Room : MonoBehaviour
     public int baseFoodAmount = 1;
     public int baseWaterAmount = 1;
     public int baseMaterialAmount = 1;
+    public int baseMedpackAmount = 1;
     public string roomName = "Default Room";
 
-    public Transform[] spots; // Array of spots in the room
+    public Transform[] spots; // spots in the room
     private List<Transform> availableSpots;
     private List<Transform> occupiedSpots = new List<Transform>();
-    private List<Character> charactersInRoom = new List<Character>(); // List to store characters in the room
+    private List<Character> charactersInRoom = new List<Character>();
 
     private void Start()
     {
-        availableSpots = new List<Transform>(spots); // Initialize available spots
+        availableSpots = new List<Transform>(spots); 
         StartCoroutine(AddResourcesOverTime());
         Debug.Log("Room started and resource coroutine initiated.");
     }
@@ -63,6 +64,7 @@ public class Room : MonoBehaviour
                 int totalFoodAmount = 0;
                 int totalWaterAmount = 0;
                 int totalMaterialAmount = 0;
+                int totalMedpackAmount = 0;
 
                 foreach (Character character in charactersInRoom)
                 {
@@ -70,15 +72,17 @@ public class Room : MonoBehaviour
                     totalFoodAmount += Mathf.RoundToInt(baseFoodAmount * productivityMultiplier);
                     totalWaterAmount += Mathf.RoundToInt(baseWaterAmount * productivityMultiplier);
                     totalMaterialAmount += Mathf.RoundToInt(baseMaterialAmount * productivityMultiplier);
+                    totalMedpackAmount += Mathf.RoundToInt(baseMedpackAmount * productivityMultiplier);
 
-                    Debug.Log($"Character {character.characterName} with productivity {character.productivity}% contributes: Food {Mathf.RoundToInt(baseFoodAmount * productivityMultiplier)}, Water {Mathf.RoundToInt(baseWaterAmount * productivityMultiplier)}, Materials {Mathf.RoundToInt(baseMaterialAmount * productivityMultiplier)}");
+                    Debug.Log($"Character {character.characterName} with productivity {character.productivity}% contributes: Food {Mathf.RoundToInt(baseFoodAmount * productivityMultiplier)}, Water {Mathf.RoundToInt(baseWaterAmount * productivityMultiplier)}, Materials {Mathf.RoundToInt(baseMaterialAmount * productivityMultiplier)}, Medpacks {Mathf.RoundToInt(baseMedpackAmount * productivityMultiplier)}");
                 }
 
                 Inventory.Instance.AddFood(totalFoodAmount); // Add food amount
                 Inventory.Instance.AddWater(totalWaterAmount); // Add water amount
                 Inventory.Instance.AddMaterials(totalMaterialAmount); // Add material amount
+                Inventory.Instance.AddMedpacks(totalMedpackAmount); // Add medpack amount
 
-                Debug.Log($"Total resources added to inventory: Food {totalFoodAmount}, Water {totalWaterAmount}, Materials {totalMaterialAmount}");
+                Debug.Log($"Total resources added to inventory: Food {totalFoodAmount}, Water {totalWaterAmount}, Materials {totalMaterialAmount}, Medpacks {totalMedpackAmount}");
             }
         }
     }

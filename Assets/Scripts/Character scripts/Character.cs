@@ -98,27 +98,35 @@ public class Character : MonoBehaviour
 
     public void TryToEat()
     {
-        if (world.HasFood(1))
+        Debug.Log($"Current hunger: {hunger}, Food available: {world.HasFood(1)}");
+
+        // Ensure the character only eats if hunger is at or below 80%
+        if (hunger <= 160 && world.HasFood(1))
         {
-            Eat(80);
+            float foodValue = Mathf.Min(160, maxHunger - hunger);
+            Eat(foodValue);
             world.RemoveFood(1);
         }
         else
         {
-            Debug.Log("No food in inventory!");
+            Debug.Log("Character is not hungry enough or no food in inventory!");
         }
     }
 
     public void TryToDrink()
     {
-        if (world.HasWater(1))
+        Debug.Log($"Current thirst: {thirst}, Water available: {world.HasWater(1)}");
+
+        // Ensure the character only drinks if thirst is at or below 80%
+        if (thirst <= 160 && world.HasWater(1))
         {
-            Drink(80);
+            float waterValue = Mathf.Min(160, maxThirst - thirst);
+            Drink(waterValue);
             world.RemoveWater(1);
         }
         else
         {
-            Debug.Log("No water in inventory!");
+            Debug.Log("Character is not thirsty enough or no water in inventory!");
         }
     }
 

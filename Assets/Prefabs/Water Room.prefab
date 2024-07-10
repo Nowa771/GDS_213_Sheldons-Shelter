@@ -2427,6 +2427,7 @@ MonoBehaviour:
   baseFoodAmount: 0
   baseWaterAmount: 1
   baseMaterialAmount: 0
+  baseMedpackAmount: 0
   roomName: Water room
   spots:
   - {fileID: 6619502042761079704}

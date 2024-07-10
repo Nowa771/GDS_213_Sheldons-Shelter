@@ -2437,6 +2437,7 @@ MonoBehaviour:
   baseFoodAmount: 1
   baseWaterAmount: 0
   baseMaterialAmount: 0
+  baseMedpackAmount: 0
   roomName: Greenhouse
   spots:
   - {fileID: 7119068794309739169}
