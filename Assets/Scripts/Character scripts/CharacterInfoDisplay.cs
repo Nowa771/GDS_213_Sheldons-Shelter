@@ -13,6 +13,7 @@ public class CharacterInfoDisplay : MonoBehaviour
     public GameObject infoPanel;
     public Button eatButton;
     public Button drinkButton;
+    public Button healButton; // New heal button
     public Button closeButton;
 
     private Character selectedCharacter;
@@ -32,7 +33,10 @@ public class CharacterInfoDisplay : MonoBehaviour
         {
             drinkButton.onClick.AddListener(TryToDrink);
         }
-
+        if (healButton != null)
+        {
+            healButton.onClick.AddListener(TryToHeal); // Add listener for the heal button
+        }
         if (closeButton != null)
         {
             closeButton.onClick.AddListener(ClosePanel);
@@ -118,6 +122,20 @@ public class CharacterInfoDisplay : MonoBehaviour
         {
             selectedCharacter.TryToDrink();
             UpdateCharacterInfo();
+        }
+    }
+
+    void TryToHeal()
+    {
+        if (selectedCharacter != null && Inventory.Instance.HasMedpacks(1))
+        {
+            selectedCharacter.Heal(50); // Adjust heal amount as needed
+            Inventory.Instance.RemoveMedpacks(1); // Update inventory
+            UpdateCharacterInfo();
+        }
+        else
+        {
+            Debug.Log("No medpacks available!");
         }
     }
 

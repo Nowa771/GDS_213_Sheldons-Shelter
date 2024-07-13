@@ -9,7 +9,8 @@ public class BuildingPlacement : MonoBehaviour
 {
     public List<GameObject> buildingPrefabs;
     public List<int> buildingCosts;
-    public GridSystem gridSystem;
+    public GridSystem gridSystem1;
+    public GridSystem gridSystem2; // Second grid
     public GameObject selectionPanel;
     public GameObject buildingButtonPrefab; // Prefab for building buttons
     public Transform buttonContainer; // Parent object for the building buttons
@@ -21,7 +22,8 @@ public class BuildingPlacement : MonoBehaviour
     private bool removeMode = false; // New variable to track remove mode
     private GameObject selectedBuildingPrefab;
     private int selectedBuildingCost;
-    private Dictionary<Vector2Int, GameObject> placedBuildings = new Dictionary<Vector2Int, GameObject>();
+    private Dictionary<Vector2Int, GameObject> placedBuildings1 = new Dictionary<Vector2Int, GameObject>();
+    private Dictionary<Vector2Int, GameObject> placedBuildings2 = new Dictionary<Vector2Int, GameObject>();
 
     [SerializeField]
     private float navMeshBakeDelay = 1.0f; // Delay before baking NavMesh
@@ -115,12 +117,17 @@ public class BuildingPlacement : MonoBehaviour
     {
         Vector3 mousePosition = GetMouseWorldPosition();
         int x, y;
-        GetGridPosition(mousePosition, out x, out y);
 
-        if (gridSystem.IsCellAvailable(x, y))
+        if (GetGridPosition(mousePosition, gridSystem1, out x, out y) && gridSystem1.IsCellAvailable(x, y))
         {
             buildingPreview.SetActive(true);
-            buildingPreview.transform.position = gridSystem.GetCellCenter(x, y);
+            buildingPreview.transform.position = gridSystem1.GetCellCenter(x, y);
+            buildingPreview.transform.rotation = Quaternion.Euler(0f, -90f, 0f);
+        }
+        else if (GetGridPosition(mousePosition, gridSystem2, out x, out y) && gridSystem2.IsCellAvailable(x, y))
+        {
+            buildingPreview.SetActive(true);
+            buildingPreview.transform.position = gridSystem2.GetCellCenter(x, y);
             buildingPreview.transform.rotation = Quaternion.Euler(0f, -90f, 0f);
         }
         else
@@ -133,26 +140,49 @@ public class BuildingPlacement : MonoBehaviour
     {
         Vector3 mousePosition = GetMouseWorldPosition();
         int x, y;
-        GetGridPosition(mousePosition, out x, out y);
-        Vector2Int gridPos = new Vector2Int(x, y);
+        Vector2Int gridPos;
 
-        if (gridSystem.IsCellAvailable(x, y) && Inventory.Instance.HasMaterials(selectedBuildingCost))
+        if (GetGridPosition(mousePosition, gridSystem1, out x, out y) && gridSystem1.IsCellAvailable(x, y))
         {
-            Quaternion rotation = Quaternion.Euler(0, -90, 0);
+            gridPos = new Vector2Int(x, y);
+            if (Inventory.Instance.HasMaterials(selectedBuildingCost))
+            {
+                Quaternion rotation = Quaternion.Euler(0, -90, 0);
+                GameObject newBuilding = Instantiate(selectedBuildingPrefab, gridSystem1.GetCellCenter(x, y), rotation);
 
-            GameObject newBuilding = Instantiate(selectedBuildingPrefab, gridSystem.GetCellCenter(x, y), rotation);
+                gridSystem1.OccupyCell(x, y);
+                placedBuildings1[gridPos] = newBuilding;
+                Inventory.Instance.RemoveMaterials(selectedBuildingCost); // Deduct materials
+                Destroy(buildingPreview);
 
-            gridSystem.OccupyCell(x, y);
-            placedBuildings[gridPos] = newBuilding;
-            Inventory.Instance.RemoveMaterials(selectedBuildingCost); // Deduct materials
-            Destroy(buildingPreview);
-
-            // Trigger NavMesh baking after a delay
-            StartCoroutine(DelayedNavMeshBake());
+                // Trigger NavMesh baking after a delay
+                StartCoroutine(DelayedNavMeshBake());
+            }
+            else
+            {
+                Debug.Log("Not enough materials to place the building.");
+            }
         }
-        else
+        else if (GetGridPosition(mousePosition, gridSystem2, out x, out y) && gridSystem2.IsCellAvailable(x, y))
         {
-            Debug.Log("Not enough materials to place the building.");
+            gridPos = new Vector2Int(x, y);
+            if (Inventory.Instance.HasMaterials(selectedBuildingCost))
+            {
+                Quaternion rotation = Quaternion.Euler(0, -90, 0);
+                GameObject newBuilding = Instantiate(selectedBuildingPrefab, gridSystem2.GetCellCenter(x, y), rotation);
+
+                gridSystem2.OccupyCell(x, y);
+                placedBuildings2[gridPos] = newBuilding;
+                Inventory.Instance.RemoveMaterials(selectedBuildingCost); // Deduct materials
+                Destroy(buildingPreview);
+
+                // Trigger NavMesh baking after a delay
+                StartCoroutine(DelayedNavMeshBake());
+            }
+            else
+            {
+                Debug.Log("Not enough materials to place the building.");
+            }
         }
     }
 
@@ -168,18 +198,35 @@ public class BuildingPlacement : MonoBehaviour
     {
         Vector3 mousePosition = GetMouseWorldPosition();
         int x, y;
-        GetGridPosition(mousePosition, out x, out y);
-        Vector2Int gridPos = new Vector2Int(x, y);
+        Vector2Int gridPos;
 
-        if (placedBuildings.ContainsKey(gridPos))
+        if (GetGridPosition(mousePosition, gridSystem1, out x, out y))
         {
-            GameObject buildingToRemove = placedBuildings[gridPos];
-            Destroy(buildingToRemove);
-            placedBuildings.Remove(gridPos);
-            gridSystem.ClearCell(x, y);
+            gridPos = new Vector2Int(x, y);
+            if (placedBuildings1.ContainsKey(gridPos))
+            {
+                GameObject buildingToRemove = placedBuildings1[gridPos];
+                Destroy(buildingToRemove);
+                placedBuildings1.Remove(gridPos);
+                gridSystem1.ClearCell(x, y);
 
-            // Trigger NavMesh baking after a delay
-            StartCoroutine(DelayedNavMeshBake());
+                // Trigger NavMesh baking after a delay
+                StartCoroutine(DelayedNavMeshBake());
+            }
+        }
+        else if (GetGridPosition(mousePosition, gridSystem2, out x, out y))
+        {
+            gridPos = new Vector2Int(x, y);
+            if (placedBuildings2.ContainsKey(gridPos))
+            {
+                GameObject buildingToRemove = placedBuildings2[gridPos];
+                Destroy(buildingToRemove);
+                placedBuildings2.Remove(gridPos);
+                gridSystem2.ClearCell(x, y);
+
+                // Trigger NavMesh baking after a delay
+                StartCoroutine(DelayedNavMeshBake());
+            }
         }
     }
 
@@ -207,11 +254,12 @@ public class BuildingPlacement : MonoBehaviour
         return Vector3.zero;
     }
 
-    void GetGridPosition(Vector3 worldPosition, out int x, out int y)
+    bool GetGridPosition(Vector3 worldPosition, GridSystem gridSystem, out int x, out int y)
     {
         Vector3 localPosition = gridSystem.transform.InverseTransformPoint(worldPosition);
         x = Mathf.FloorToInt(localPosition.x / gridSystem.cellWidth);
         y = Mathf.FloorToInt(localPosition.z / gridSystem.cellHeight);
+        return x >= 0 && y >= 0 && x < gridSystem.width && y < gridSystem.height;
     }
 
     void PopulateBuildingButtons()

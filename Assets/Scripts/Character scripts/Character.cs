@@ -101,9 +101,9 @@ public class Character : MonoBehaviour
         Debug.Log($"Current hunger: {hunger}, Food available: {world.HasFood(1)}");
 
         // Ensure the character only eats if hunger is at or below 80%
-        if (hunger <= 160 && world.HasFood(1))
+        if (hunger <= 80 && world.HasFood(1))
         {
-            float foodValue = Mathf.Min(160, maxHunger - hunger);
+            float foodValue = Mathf.Min(80, maxHunger - hunger);
             Eat(foodValue);
             world.RemoveFood(1);
         }
@@ -118,9 +118,9 @@ public class Character : MonoBehaviour
         Debug.Log($"Current thirst: {thirst}, Water available: {world.HasWater(1)}");
 
         // Ensure the character only drinks if thirst is at or below 80%
-        if (thirst <= 160 && world.HasWater(1))
+        if (thirst <= 80 && world.HasWater(1))
         {
-            float waterValue = Mathf.Min(160, maxThirst - thirst);
+            float waterValue = Mathf.Min(80, maxThirst - thirst);
             Drink(waterValue);
             world.RemoveWater(1);
         }
@@ -138,6 +138,39 @@ public class Character : MonoBehaviour
     public void Drink(float waterValue)
     {
         thirst = Mathf.Min(thirst + waterValue, maxThirst);
+    }
+
+    public void Heal(float healAmount)
+    {
+        Debug.Log(characterName + " attempting to heal. Current health: " + health);
+
+        // Check if health is already at max
+        if (health >= maxHealth)
+        {
+            Debug.Log(characterName + " is already at maximum health. No med pack used.");
+            return; // Exit the method if already at max health
+        }
+
+        // Check if there are med packs available
+        if (!Inventory.Instance.HasMedpacks(1))
+        {
+            Debug.Log("No med packs available for healing.");
+            return; // Exit if no med packs are available
+        }
+
+        // Proceed with healing and consuming med pack
+        float healthBeforeHealing = health;
+        health = Mathf.Min(health + healAmount, maxHealth);
+
+        if (health > healthBeforeHealing) // Only consume if healing actually occurs
+        {
+            Inventory.Instance.RemoveMedpacks(1); // Remove one med pack
+            Debug.Log(characterName + " has been healed. Current health: " + health + ". Med pack used.");
+        }
+        else
+        {
+            Debug.Log("Healing was attempted but health is already at maximum.");
+        }
     }
 
     private string GenerateRandomName()
