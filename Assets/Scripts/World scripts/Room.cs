@@ -18,7 +18,7 @@ public class Room : MonoBehaviour
 
     private void Start()
     {
-        availableSpots = new List<Transform>(spots); 
+        availableSpots = new List<Transform>(spots);
         StartCoroutine(AddResourcesOverTime());
         Debug.Log("Room started and resource coroutine initiated.");
     }

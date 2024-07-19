@@ -3,84 +3,134 @@ using UnityEngine;
 public class TutorialManager : MonoBehaviour
 {
     public GameObject MovementTutorial;
-    public GameObject BuildInsturctions;
+    public GameObject BuildInstructions;
+    public GameObject AdditionalBuildInstructions;
     public GameObject CharacterSelect;
     public GameObject CharacterMove;
 
-    private bool wp = false, ap = false, sp = false, dp = false;
-    private bool Spacep = false;
-    private bool mouse1d = false;
-    private bool mouse0d = false; 
-    private bool isTutorialMode = true;
-
-    // Start is called before the first frame update
-    void Start()
+    private enum TutorialStep
     {
-        // Start tutorial mode
-        isTutorialMode = true;
+        Movement,
+        Build,
+        AdditionalBuild,
+        CharacterMove,
+        CharacterSelect,
+        None
     }
 
-    // Update is called once per frame
+    private TutorialStep currentStep = TutorialStep.Movement;
+    private bool wp, ap, sp, dp;
+    private bool spacePressed;
+    private bool mouse1Pressed;
+    private bool mouse0Pressed;
+
+    void Start()
+    {
+        // Start tutorial mode with the first step
+        currentStep = TutorialStep.Movement;
+        SetTutorialStep(TutorialStep.Movement);
+    }
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        switch (currentStep)
         {
-            wp = true;
+            case TutorialStep.Movement:
+                HandleMovementStep();
+                break;
+            case TutorialStep.Build:
+                HandleBuildStep();
+                break;
+            case TutorialStep.AdditionalBuild:
+                HandleAdditionalBuildStep();
+                break;
+            case TutorialStep.CharacterMove:
+                HandleCharacterMoveStep();
+                break;
+            case TutorialStep.CharacterSelect:
+                HandleCharacterSelectStep();
+                break;
         }
+    }
 
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            ap = true;
-        }
+    private void HandleMovementStep()
+    {
+        if (Input.GetKeyDown(KeyCode.W)) wp = true;
+        if (Input.GetKeyDown(KeyCode.A)) ap = true;
+        if (Input.GetKeyDown(KeyCode.S)) sp = true;
+        if (Input.GetKeyDown(KeyCode.D)) dp = true;
 
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            sp = true;
-        }
-
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            dp = true;
-        }
+        Debug.Log($"Movement step: W: {wp}, A: {ap}, S: {sp}, D: {dp}");
 
         if (wp && ap && sp && dp)
         {
-            MovementTutorial.SetActive(false);
-
-            if (Input.GetKeyDown(KeyCode.B))
-            {
-                Spacep = true;
-            }
-
-            BuildInsturctions.SetActive(true);
-
-            if (Spacep)
-            {
-                BuildInsturctions.SetActive(false);
-                CharacterMove.SetActive(true);
-
-                if (Input.GetMouseButtonDown(1))
-                {
-                    mouse1d = true;
-                }
-
-                if (mouse1d)
-                {
-                    CharacterMove.SetActive(false);
-                    CharacterSelect.SetActive(true);
-
-                    if (Input.GetMouseButtonDown(0))
-                    {
-                        mouse0d = true;
-                    }
-
-                    if (mouse0d)
-                    {
-                        CharacterSelect.SetActive(false);
-                        isTutorialMode = false; // Set tutorial mode to false
-                    }
-                }
-            }
+            SetTutorialStep(TutorialStep.Build);
         }
+    }
+
+    private void HandleBuildStep()
+    {
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            spacePressed = true;
+        }
+
+        Debug.Log($"Build step: B pressed: {spacePressed}");
+
+        if (spacePressed)
+        {
+            SetTutorialStep(TutorialStep.AdditionalBuild);  // Proceed to the next step
+        }
+    }
+
+    private void HandleAdditionalBuildStep()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("Additional build step: Mouse button 0 pressed");
+            SetTutorialStep(TutorialStep.CharacterMove);  // Proceed to the next step
+        }
+    }
+
+    private void HandleCharacterMoveStep()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            mouse1Pressed = true;
+        }
+
+        Debug.Log($"Character move step: Mouse button 1 pressed: {mouse1Pressed}");
+
+        if (mouse1Pressed)
+        {
+            SetTutorialStep(TutorialStep.CharacterSelect); // Proceed to the next step
+        }
+    }
+
+    private void HandleCharacterSelectStep()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            mouse0Pressed = true;
+        }
+
+        Debug.Log($"Character select step: Mouse button 0 pressed: {mouse0Pressed}");
+
+        if (mouse0Pressed)
+        {
+            SetTutorialStep(TutorialStep.None);  // End of tutorial
+        }
+    }
+
+    private void SetTutorialStep(TutorialStep step)
+    {
+        currentStep = step;
+        Debug.Log($"Tutorial step changed to: {step}");
+
+        MovementTutorial.SetActive(step == TutorialStep.Movement);
+        BuildInstructions.SetActive(step == TutorialStep.Build);
+        AdditionalBuildInstructions.SetActive(step == TutorialStep.AdditionalBuild);
+        CharacterMove.SetActive(step == TutorialStep.CharacterMove);
+        CharacterSelect.SetActive(step == TutorialStep.CharacterSelect);
     }
 }

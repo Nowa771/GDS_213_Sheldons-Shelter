@@ -46,7 +46,7 @@ public class Character : MonoBehaviour
         productivity = Random.Range(0f, 200f); // productivity percentage 
 
         // Calculate adjusted decay rates based on productivity
-        float productivityFactor = productivity / 100f;
+        float productivityFactor = productivity / 200f;
         hungerDecayRate = baseHungerDecayRate * productivityFactor;
         thirstDecayRate = baseThirstDecayRate * productivityFactor;
     }
@@ -101,9 +101,9 @@ public class Character : MonoBehaviour
         Debug.Log($"Current hunger: {hunger}, Food available: {world.HasFood(1)}");
 
         // Ensure the character only eats if hunger is at or below 80%
-        if (hunger <= 80 && world.HasFood(1))
+        if (hunger <= 160 && world.HasFood(1))
         {
-            float foodValue = Mathf.Min(80, maxHunger - hunger);
+            float foodValue = Mathf.Min(400, maxHunger - hunger);
             Eat(foodValue);
             world.RemoveFood(1);
         }
@@ -118,9 +118,9 @@ public class Character : MonoBehaviour
         Debug.Log($"Current thirst: {thirst}, Water available: {world.HasWater(1)}");
 
         // Ensure the character only drinks if thirst is at or below 80%
-        if (thirst <= 80 && world.HasWater(1))
+        if (thirst <= 160 && world.HasWater(1))
         {
-            float waterValue = Mathf.Min(80, maxThirst - thirst);
+            float waterValue = Mathf.Min(400, maxThirst - thirst);
             Drink(waterValue);
             world.RemoveWater(1);
         }
