@@ -17,6 +17,10 @@ public class Character : MonoBehaviour
     public float maxHealth = 100f;
 
     public AudioClip deathSound;
+    public AudioClip eatSound;
+    public AudioClip drinkSound;
+    public AudioClip healSound;
+
     private AudioSource audioSource;
     private bool isDead = false;
 
@@ -133,11 +137,13 @@ public class Character : MonoBehaviour
     public void Eat(float foodValue)
     {
         hunger = Mathf.Min(hunger + foodValue, maxHunger);
+        audioSource.PlayOneShot(eatSound); // Play eating sound
     }
 
     public void Drink(float waterValue)
     {
         thirst = Mathf.Min(thirst + waterValue, maxThirst);
+        audioSource.PlayOneShot(drinkSound); // Play drinking sound
     }
 
     public void Heal(float healAmount)
@@ -166,6 +172,7 @@ public class Character : MonoBehaviour
         {
             Inventory.Instance.RemoveMedpacks(1); // Remove one med pack
             Debug.Log(characterName + " has been healed. Current health: " + health + ". Med pack used.");
+            audioSource.PlayOneShot(healSound); // Play healing sound
         }
         else
         {

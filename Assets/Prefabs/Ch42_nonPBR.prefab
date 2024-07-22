@@ -392,13 +392,16 @@ MonoBehaviour:
   hunger: 200
   thirst: 200
   health: 100
-  hungerDecayRate: 1
-  thirstDecayRate: 1.5
+  baseHungerDecayRate: 1
+  baseThirstDecayRate: 1
   healthDecayRate: 1
   maxHunger: 200
   maxThirst: 200
   maxHealth: 100
   deathSound: {fileID: 8300000, guid: a0a35b4dd99eac746b9fb0e1a0c37a31, type: 3}
+  eatSound: {fileID: 8300000, guid: 0a3f26e162c80454fa8a8e1a8b9897f3, type: 3}
+  drinkSound: {fileID: 8300000, guid: 9b1580a9e3fce4f4481ca78f5b8af093, type: 3}
+  healSound: {fileID: 0}
   productivity: 0
 --- !u!114 &6857151216305425084
 MonoBehaviour:
