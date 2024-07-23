@@ -21,6 +21,8 @@ public class Character : MonoBehaviour
     public AudioClip drinkSound;
     public AudioClip healSound;
 
+    public GameObject lowNeedsSymbol;  // Single object for low needs
+
     private AudioSource audioSource;
     private bool isDead = false;
 
@@ -53,11 +55,14 @@ public class Character : MonoBehaviour
         float productivityFactor = productivity / 200f;
         hungerDecayRate = baseHungerDecayRate * productivityFactor;
         thirstDecayRate = baseThirstDecayRate * productivityFactor;
+
+        UpdateSymbol();
     }
 
     void Update()
     {
         ManageNeeds();
+        UpdateSymbol();
     }
 
     void ManageNeeds()
@@ -85,7 +90,10 @@ public class Character : MonoBehaviour
     void HandleDeath()
     {
         isDead = true;
-        audioSource.PlayOneShot(deathSound);
+        if (deathSound != null)
+        {
+            audioSource.PlayOneShot(deathSound);
+        }
         StartCoroutine(DisappearAfterSound());
 
         if (shelter != null)
@@ -96,7 +104,7 @@ public class Character : MonoBehaviour
 
     IEnumerator DisappearAfterSound()
     {
-        yield return new WaitForSeconds(deathSound.length);
+        yield return new WaitForSeconds(deathSound != null ? deathSound.length : 0);
         gameObject.SetActive(false);
     }
 
@@ -137,13 +145,21 @@ public class Character : MonoBehaviour
     public void Eat(float foodValue)
     {
         hunger = Mathf.Min(hunger + foodValue, maxHunger);
-        audioSource.PlayOneShot(eatSound); // Play eating sound
+        if (eatSound != null)
+        {
+            audioSource.PlayOneShot(eatSound); // Play eating sound
+        }
+        UpdateSymbol();
     }
 
     public void Drink(float waterValue)
     {
         thirst = Mathf.Min(thirst + waterValue, maxThirst);
-        audioSource.PlayOneShot(drinkSound); // Play drinking sound
+        if (drinkSound != null)
+        {
+            audioSource.PlayOneShot(drinkSound); // Play drinking sound
+        }
+        UpdateSymbol();
     }
 
     public void Heal(float healAmount)
@@ -172,11 +188,24 @@ public class Character : MonoBehaviour
         {
             Inventory.Instance.RemoveMedpacks(1); // Remove one med pack
             Debug.Log(characterName + " has been healed. Current health: " + health + ". Med pack used.");
-            audioSource.PlayOneShot(healSound); // Play healing sound
+            if (healSound != null)
+            {
+                audioSource.PlayOneShot(healSound); // Play healing sound
+            }
+            UpdateSymbol();
         }
         else
         {
             Debug.Log("Healing was attempted but health is already at maximum.");
+        }
+    }
+
+    private void UpdateSymbol()
+    {
+        if (lowNeedsSymbol != null)
+        {
+            bool showSymbol = (hunger / maxHunger < 0.25f) || (thirst / maxThirst < 0.25f) || (health / maxHealth < 0.25f);
+            lowNeedsSymbol.SetActive(showSymbol);
         }
     }
 
