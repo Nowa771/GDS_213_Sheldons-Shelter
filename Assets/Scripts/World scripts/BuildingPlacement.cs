@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 using Unity.AI.Navigation;
 
 public class BuildingPlacement : MonoBehaviour
@@ -12,6 +13,7 @@ public class BuildingPlacement : MonoBehaviour
     public GridSystem gridSystem1;
     public GridSystem gridSystem2; // Second grid
     public GameObject selectionPanel;
+    public RectTransform selectionPanelRectTransform; // RectTransform for sliding animation
     public GameObject buildingButtonPrefab; // Prefab for building buttons
     public Transform buttonContainer; // Parent object for the building buttons
     public NavMeshSurface navMeshSurface;
@@ -27,10 +29,30 @@ public class BuildingPlacement : MonoBehaviour
 
     [SerializeField]
     private float navMeshBakeDelay = 1.0f; // Delay before baking NavMesh
+    [SerializeField]
+    private float slideDuration = 0.5f; // Duration of the sliding animation
+    [SerializeField]
+    private Vector2 slideInOffset = new Vector2(0, 0); // Offset for sliding in
+    [SerializeField]
+    private Vector2 slideOutOffset = new Vector2(-500, 0); // Offset for sliding out
+
+    private Vector2 slideInPosition;
+    private Vector2 slideOutPosition;
 
     void Start()
     {
+        if (selectionPanelRectTransform == null)
+        {
+            selectionPanelRectTransform = selectionPanel.GetComponent<RectTransform>();
+        }
+
+        // Initialize positions based on offsets
+        slideInPosition = selectionPanelRectTransform.anchoredPosition + slideInOffset;
+        slideOutPosition = selectionPanelRectTransform.anchoredPosition + slideOutOffset;
+
+        // Initially hide the panel
         selectionPanel.SetActive(false);
+
         PopulateBuildingButtons();
 
         if (buildingPrefabs.Count > 0)
@@ -65,31 +87,37 @@ public class BuildingPlacement : MonoBehaviour
     void ToggleBuildMode()
     {
         buildMode = !buildMode;
-        selectionPanel.SetActive(buildMode);
 
         if (buildMode)
         {
+            selectionPanel.SetActive(true);
+            StartCoroutine(SlidePanel(selectionPanelRectTransform, slideInPosition, slideDuration));
             StartPlacingBuilding();
         }
         else
         {
-            if (buildingPreview != null)
-            {
-                Destroy(buildingPreview);
-            }
+            StartCoroutine(SlidePanel(selectionPanelRectTransform, slideOutPosition, slideDuration, () => {
+                // Don't deactivate the panel, just move it out of view
+                // No need to set selectionPanel.SetActive(false);
+                if (buildingPreview != null)
+                {
+                    Destroy(buildingPreview);
+                }
+            }));
         }
     }
 
     void CloseBuildMenu()
     {
         buildMode = false;
-        selectionPanel.SetActive(false);
         removeMode = false;
 
         if (buildingPreview != null)
         {
             Destroy(buildingPreview);
         }
+
+        StartCoroutine(SlidePanel(selectionPanelRectTransform, slideOutPosition, slideDuration));
     }
 
     void StartPlacingBuilding()
@@ -317,6 +345,23 @@ public class BuildingPlacement : MonoBehaviour
 
     bool IsPointerOverUI()
     {
-        return UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject();
+        return EventSystem.current.IsPointerOverGameObject();
+    }
+
+    IEnumerator SlidePanel(RectTransform panel, Vector2 targetPosition, float duration, System.Action onComplete = null)
+    {
+        Vector2 startPosition = panel.anchoredPosition;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            panel.anchoredPosition = Vector2.Lerp(startPosition, targetPosition, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        panel.anchoredPosition = targetPosition;
+
+        onComplete?.Invoke();
     }
 }

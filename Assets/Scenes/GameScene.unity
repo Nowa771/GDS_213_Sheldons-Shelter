@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.25510252, g: 0.21753561, b: 0.2347335, a: 1}
+  m_IndirectSpecularColor: {r: 0.2550819, g: 0.21752568, b: 0.23472735, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -386,20 +386,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingPrefabs:
+  - {fileID: 9150296234865035366, guid: 6a9bd194f58c4e94eb2440a936b1489c, type: 3}
   - {fileID: 6698274750687946022, guid: 5c43df10b27479249af9fcb72456d184, type: 3}
   - {fileID: 8220925914722436625, guid: 89eae00bf66470b4d9f5c089c292caa1, type: 3}
-  - {fileID: 9150296234865035366, guid: 6a9bd194f58c4e94eb2440a936b1489c, type: 3}
   - {fileID: 6086908337184280076, guid: f3ee5e75465238f46a9f0f13d21e8112, type: 3}
   - {fileID: 6967839003848008445, guid: b690b1dd29307ab4b82b4241aac44cb6, type: 3}
   buildingCosts: 0500000005000000050000000500000005000000
   gridSystem1: {fileID: 542862604}
   gridSystem2: {fileID: 610460983}
-  selectionPanel: {fileID: 1939043749}
+  selectionPanel: {fileID: 978105570}
+  selectionPanelRectTransform: {fileID: 978105571}
   buildingButtonPrefab: {fileID: 1016122548}
   buttonContainer: {fileID: 1403407955}
   navMeshSurface: {fileID: 2057639511}
   closeButton: {fileID: 6888991193385881112}
   navMeshBakeDelay: 2
+  slideDuration: 0.5
+  slideInOffset: {x: 0, y: 180}
+  slideOutOffset: {x: 0, y: 0}
 --- !u!4 &130311755
 Transform:
   m_ObjectHideFlags: 0
@@ -4421,10 +4425,10 @@ RectTransform:
   - {fileID: 1403407955}
   m_Father: {fileID: 1939043753}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -450}
-  m_SizeDelta: {x: 0, y: -900}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: -90}
+  m_SizeDelta: {x: 1920, y: 180}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &978105572
 MonoBehaviour:
@@ -7683,7 +7687,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1939043750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7713,10 +7717,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -8451,7 +8455,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 862, y: 2.7}
+  m_AnchoredPosition: {x: 873, y: 1}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5013317923297044250
@@ -8588,11 +8592,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1740896063189240883, guid: cca6c6fd804ea2343b48d11147a56a5e, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -877
+      value: -870
       objectReference: {fileID: 0}
     - target: {fileID: 1740896063189240883, guid: cca6c6fd804ea2343b48d11147a56a5e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.7
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 1740896063189240883, guid: cca6c6fd804ea2343b48d11147a56a5e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
