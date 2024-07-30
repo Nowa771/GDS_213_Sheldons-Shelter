@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
-    public float interval = 5f;
+    public float baseInterval = 5f; // Base interval time in seconds
     public int baseFoodAmount = 1;
     public int baseWaterAmount = 1;
     public int baseMaterialAmount = 1;
@@ -58,31 +58,35 @@ public class Room : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(interval);
             if (charactersInRoom.Count > 0)
             {
-                int totalFoodAmount = 0;
-                int totalWaterAmount = 0;
-                int totalMaterialAmount = 0;
-                int totalMedpackAmount = 0;
-
+                // Calculate average productivity
+                float totalProductivity = 0f;
                 foreach (Character character in charactersInRoom)
                 {
-                    float productivityMultiplier = character.productivity / 100f;
-                    totalFoodAmount += Mathf.RoundToInt(baseFoodAmount * productivityMultiplier);
-                    totalWaterAmount += Mathf.RoundToInt(baseWaterAmount * productivityMultiplier);
-                    totalMaterialAmount += Mathf.RoundToInt(baseMaterialAmount * productivityMultiplier);
-                    totalMedpackAmount += Mathf.RoundToInt(baseMedpackAmount * productivityMultiplier);
-
-                    Debug.Log($"Character {character.characterName} with productivity {character.productivity}% contributes: Food {Mathf.RoundToInt(baseFoodAmount * productivityMultiplier)}, Water {Mathf.RoundToInt(baseWaterAmount * productivityMultiplier)}, Materials {Mathf.RoundToInt(baseMaterialAmount * productivityMultiplier)}, Medpacks {Mathf.RoundToInt(baseMedpackAmount * productivityMultiplier)}");
+                    totalProductivity += character.productivity;
                 }
+                float averageProductivity = totalProductivity / charactersInRoom.Count;
 
-                Inventory.Instance.AddFood(totalFoodAmount); // Add food amount
-                Inventory.Instance.AddWater(totalWaterAmount); // Add water amount
-                Inventory.Instance.AddMaterials(totalMaterialAmount); // Add material amount
-                Inventory.Instance.AddMedpacks(totalMedpackAmount); // Add medpack amount
+                // Adjust interval based on productivity
+                float productivityMultiplier = averageProductivity / 100f;
+                float adjustedInterval = baseInterval / (1 + productivityMultiplier); // Shorter interval for higher productivity
 
-                Debug.Log($"Total resources added to inventory: Food {totalFoodAmount}, Water {totalWaterAmount}, Materials {totalMaterialAmount}, Medpacks {totalMedpackAmount}");
+                // Wait for the adjusted interval
+                yield return new WaitForSeconds(adjustedInterval);
+
+                // Add base amount of resources to inventory
+                Inventory.Instance.AddFood(baseFoodAmount);
+                Inventory.Instance.AddWater(baseWaterAmount);
+                Inventory.Instance.AddMaterials(baseMaterialAmount);
+                Inventory.Instance.AddMedpacks(baseMedpackAmount);
+
+                Debug.Log($"Resources produced with average productivity {averageProductivity}% in {adjustedInterval} seconds: Food {baseFoodAmount}, Water {baseWaterAmount}, Materials {baseMaterialAmount}, Medpacks {baseMedpackAmount}");
+            }
+            else
+            {
+                // Wait for base interval if no characters are in the room
+                yield return new WaitForSeconds(baseInterval);
             }
         }
     }

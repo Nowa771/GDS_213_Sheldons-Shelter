@@ -17,7 +17,7 @@ public class BuildingPlacement : MonoBehaviour
     public GameObject buildingButtonPrefab; // Prefab for building buttons
     public Transform buttonContainer; // Parent object for the building buttons
     public NavMeshSurface navMeshSurface;
-    public Button closeButton; // Button to close the build menu
+    public Button toggleBuildMenuButton; // Button to open and close the build menu
 
     private GameObject buildingPreview;
     private bool buildMode = false;
@@ -50,18 +50,12 @@ public class BuildingPlacement : MonoBehaviour
         slideInPosition = selectionPanelRectTransform.anchoredPosition + slideInOffset;
         slideOutPosition = selectionPanelRectTransform.anchoredPosition + slideOutOffset;
 
-        // Initially hide the panel
-        selectionPanel.SetActive(false);
+        // Initially set the panel as active
+        selectionPanel.SetActive(true);
 
         PopulateBuildingButtons();
 
-        if (buildingPrefabs.Count > 0)
-        {
-            selectedBuildingPrefab = buildingPrefabs[0];
-            selectedBuildingCost = buildingCosts[0];
-        }
-
-        closeButton.onClick.AddListener(CloseBuildMenu);
+        toggleBuildMenuButton.onClick.AddListener(ToggleBuildMode); // Link the button to ToggleBuildMode
     }
 
     void Update()
@@ -71,7 +65,7 @@ public class BuildingPlacement : MonoBehaviour
             ToggleBuildMode();
         }
 
-        if (buildMode)
+        if (buildMode && selectedBuildingPrefab != null)
         {
             if (removeMode)
             {
@@ -90,42 +84,32 @@ public class BuildingPlacement : MonoBehaviour
 
         if (buildMode)
         {
-            selectionPanel.SetActive(true);
             StartCoroutine(SlidePanel(selectionPanelRectTransform, slideInPosition, slideDuration));
-            StartPlacingBuilding();
         }
         else
         {
-            StartCoroutine(SlidePanel(selectionPanelRectTransform, slideOutPosition, slideDuration, () => {
+            StartCoroutine(SlidePanel(selectionPanelRectTransform, slideOutPosition, slideDuration, () =>
+            {
                 // Don't deactivate the panel, just move it out of view
-                // No need to set selectionPanel.SetActive(false);
                 if (buildingPreview != null)
                 {
                     Destroy(buildingPreview);
                 }
+                selectedBuildingPrefab = null; // Reset selected building
             }));
         }
     }
 
-    void CloseBuildMenu()
-    {
-        buildMode = false;
-        removeMode = false;
-
-        if (buildingPreview != null)
-        {
-            Destroy(buildingPreview);
-        }
-
-        StartCoroutine(SlidePanel(selectionPanelRectTransform, slideOutPosition, slideDuration));
-    }
-
-    void StartPlacingBuilding()
+    void StartBuildingPreview()
     {
         if (selectedBuildingPrefab != null)
         {
+            if (buildingPreview != null)
+            {
+                Destroy(buildingPreview);
+            }
             buildingPreview = Instantiate(selectedBuildingPrefab);
-            buildingPreview.SetActive(false);
+            buildingPreview.SetActive(false); // Initially hidden
         }
     }
 
@@ -324,11 +308,7 @@ public class BuildingPlacement : MonoBehaviour
         selectedBuildingPrefab = buildingPrefabs[index];
         selectedBuildingCost = buildingCosts[index];
 
-        if (buildingPreview != null)
-        {
-            Destroy(buildingPreview);
-        }
-        StartPlacingBuilding(); // Always start placing the building again
+        StartBuildingPreview(); // Start building preview
     }
 
     void OnRemoveButtonClicked()
