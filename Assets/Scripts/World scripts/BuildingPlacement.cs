@@ -1,9 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.AI;
 using UnityEngine.EventSystems;
+using System.Collections.Generic;
 using Unity.AI.Navigation;
 
 public class BuildingPlacement : MonoBehaviour
@@ -35,6 +34,8 @@ public class BuildingPlacement : MonoBehaviour
     private Vector2 slideInOffset = new Vector2(0, 0); // Offset for sliding in
     [SerializeField]
     private Vector2 slideOutOffset = new Vector2(-500, 0); // Offset for sliding out
+    [SerializeField]
+    private AnimationCurve bounceCurve; // Animation curve for bounce effect
 
     private Vector2 slideInPosition;
     private Vector2 slideOutPosition;
@@ -56,6 +57,12 @@ public class BuildingPlacement : MonoBehaviour
         PopulateBuildingButtons();
 
         toggleBuildMenuButton.onClick.AddListener(ToggleBuildMode); // Link the button to ToggleBuildMode
+
+        // Set a default bounce curve if none is provided
+        if (bounceCurve == null)
+        {
+            bounceCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(0.5f, 1.5f), new Keyframe(1, 1));
+        }
     }
 
     void Update()
@@ -335,7 +342,9 @@ public class BuildingPlacement : MonoBehaviour
 
         while (elapsedTime < duration)
         {
-            panel.anchoredPosition = Vector2.Lerp(startPosition, targetPosition, elapsedTime / duration);
+            float t = elapsedTime / duration;
+            float curveValue = bounceCurve.Evaluate(t);
+            panel.anchoredPosition = Vector2.Lerp(startPosition, targetPosition, curveValue);
             elapsedTime += Time.deltaTime;
             yield return null;
         }

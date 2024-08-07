@@ -5,23 +5,35 @@ using System;
 public class Shelter : MonoBehaviour
 {
     public int currentCapacity = 0;
-    public int maxCapacity = 0;
+    public int maxCapacity = 10; // Example default max capacity, can be set in the inspector
+    public string characterTag = "Player"; // Tag for characters in the scene
 
-    private List<GameObject> residents;
+    private List<GameObject> addedResidents;
 
     public event Action OnCapacityChanged;
 
     void Start()
     {
-        residents = new List<GameObject>();
+        addedResidents = new List<GameObject>();
+        UpdateCurrentCapacity(); // Initialize the current capacity
+    }
+
+    void UpdateCurrentCapacity()
+    {
+        // Count the number of characters in the scene by their tag
+        GameObject[] characters = GameObject.FindGameObjectsWithTag(characterTag);
+        currentCapacity = characters.Length;
+        OnCapacityChanged?.Invoke();
+        Debug.Log("Current capacity updated. Current capacity: " + currentCapacity);
     }
 
     public bool AddResident(GameObject resident)
     {
+        // Add the resident and update capacity based on the total number of characters in the scene
         if (currentCapacity < maxCapacity)
         {
-            residents.Add(resident);
-            currentCapacity++;
+            addedResidents.Add(resident);
+            UpdateCurrentCapacity(); // Update to reflect total number of characters
             OnCapacityChanged?.Invoke();
             Debug.Log("Resident added. Current capacity: " + currentCapacity);
             return true;
@@ -35,10 +47,10 @@ public class Shelter : MonoBehaviour
 
     public bool RemoveResident(GameObject resident)
     {
-        if (residents.Contains(resident))
+        if (addedResidents.Contains(resident))
         {
-            residents.Remove(resident);
-            currentCapacity--;
+            addedResidents.Remove(resident);
+            UpdateCurrentCapacity(); // Update to reflect total number of characters
             OnCapacityChanged?.Invoke();
             Debug.Log("Resident removed. Current capacity: " + currentCapacity);
             return true;
@@ -78,5 +90,11 @@ public class Shelter : MonoBehaviour
     public int GetMaxCapacity()
     {
         return maxCapacity;
+    }
+
+    // Call this method to update the current capacity dynamically
+    public void RefreshCurrentCapacity()
+    {
+        UpdateCurrentCapacity();
     }
 }

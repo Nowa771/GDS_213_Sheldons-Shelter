@@ -27,7 +27,28 @@ public class Character : MonoBehaviour
     private World world;
     private Shelter shelter;
 
-    private string[] possibleNames = new string[] { "Aiden", "Alec", "Alex", "Aubrey", "Blair", "Blake", "Brielle", "Brady", "Callie", "Casey", "Caden", "Charlie", "Cleo", "Daisy", "Derek", "Dylan", "Ella", "Eli", "Finn", "Flora", "Fiona", "Gage", "Gwen", "Harlow", "Holly", "Huxley", "Iris", "Ivy", "Jack", "Jasper", "James", "Jude", "Kai", "Kali", "Kira", "Lena", "Lila", "Liam", "Luca", "Maggie", "Mason", "Maya", "Nell", "Niamh", "Nina", "Olivia", "Oscar", "Parker", "Peyton", "Piper", "Quin", "Quincy", "Riley", "Reese", "Rex", "Sage", "Sloane", "Tate", "Theo", "Tess", "Uma", "Uriah", "Vera", "Violet", "Wade", "Wren", "Xander", "Yara", "Zane", "Zara", "Ava", "Bella", "Ben", "Brenna", "Brody", "Carmen", "Carson", "Chloe", "Clara", "Colin", "Cooper", "Derek", "Diana", "Dylan", "Eleanor", "Eli", "Emily", "Ethan", "Eva", "Felicity", "Gabriel", "Gage", "Gavin", "Grace", "Hannah", "Harper", "Harrison", "Henry", "Hudson", "Isaac", "Isla", "Jacob", "Jasmine", "Jesse", "Julia", "Kaden", "Katie", "Kayla", "Kennedy", "Kylie", "Landon", "Layla", "Leo", "Lila", "Lily", "Luna", "Madeline", "Mason", "Max", "Mia", "Michael", "Molly", "Nolan", "Nora", "Oliver", "Peyton", "Riley", "Roman", "Rosie", "Ryan", "Samantha", "Samuel", "Sophie", "Stella", "Theo", "Thomas", "Toby", "Tristan", "Victoria", "Violet", "Will", "Wyatt", "Zoe", "Zach", "Abigail", "Adam", "Adeline", "Alana", "Albert", "Alexis", "Amber", "Amelia", "Annie", "Arthur", "Ava", "Brennan", "Bria", "Bryce", "Caleb", "Cameron", "Carla", "Cedric", "Chase", "Claire", "Clayton", "Conner", "Daisy", "Daniel", "David", "Delilah", "Destiny", "Dominic", "Dylan", "Eliana", "Elliot", "Elodie", "Emery", "Eric", "Erica", "Evelyn", "Fiona", "Flora", "Freddie", "Gemma", "Gianna", "Grant", "Grayson", "Hannah", "Harper", "Harrison", "Hazel", "Irene", "Ivy", "Jacob", "Jasper", "Jesse", "Joanna", "Jordyn", "Julian", "Kara", "Kasey", "Kendall", "Kimberly", "Kylie", "Lachlan", "Lana", "Leo", "Liam", "Lincoln", "Lola", "Luca", "Madison", "Maya", "Mia", "Milo", "Morgan", "Nadia", "Naomi", "Nico", "Nina", "Oliver", "Ophelia", "Owen", "Parker", "Peyton", "Phoenix", "Piper", "Priscilla", "Riley", "River", "Rose", "Ruby", "Ryan", "Sage", "Salvatore", "Samantha", "Santiago", "Sawyer", "Scarlett", "Seth", "Silas", "Sofia", "Solomon", "Stella", "Talia", "Theo", "Tiana", "Tristan", "Ulysses", "Vera", "Violet", "Vivian", "Wyatt", "Zara", "Zoe" };
+    private string[] possibleNames = new string[]
+    {
+        "Aiden", "Alec", "Alex", "Aubrey", "Blair", "Blake", "Brielle", "Brady", "Callie", "Casey", "Caden", "Charlie",
+        "Cleo", "Daisy", "Derek", "Dylan", "Ella", "Eli", "Finn", "Flora", "Fiona", "Gage", "Gwen", "Harlow", "Holly",
+        "Huxley", "Iris", "Ivy", "Jack", "Jasper", "James", "Jude", "Kai", "Kali", "Kira", "Lena", "Lila", "Liam", "Luca",
+        "Maggie", "Mason", "Maya", "Nell", "Niamh", "Nina", "Olivia", "Oscar", "Parker", "Peyton", "Piper", "Quin",
+        "Quincy", "Riley", "Reese", "Rex", "Sage", "Sloane", "Tate", "Theo", "Tess", "Uma", "Uriah", "Vera", "Violet",
+        "Wade", "Wren", "Xander", "Yara", "Zane", "Zara", "Ava", "Bella", "Ben", "Brenna", "Brody", "Carmen", "Carson",
+        "Chloe", "Clara", "Colin", "Cooper", "Diana", "Dylan", "Eleanor", "Emily", "Ethan", "Eva", "Felicity", "Gabriel",
+        "Gage", "Gavin", "Grace", "Hannah", "Harper", "Harrison", "Henry", "Hudson", "Isaac", "Isla", "Jacob", "Jasmine",
+        "Jesse", "Julia", "Kaden", "Katie", "Kayla", "Kennedy", "Kylie", "Landon", "Layla", "Leo", "Lila", "Lily", "Luna",
+        "Madeline", "Max", "Mia", "Michael", "Molly", "Nolan", "Nora", "Oliver", "Roman", "Rosie", "Ryan", "Samantha",
+        "Samuel", "Sophie", "Stella", "Theo", "Thomas", "Toby", "Tristan", "Victoria", "Violet", "Will", "Wyatt", "Zoe",
+        "Zach", "Abigail", "Adam", "Adeline", "Alana", "Albert", "Alexis", "Amber", "Amelia", "Annie", "Arthur", "Ava",
+        "Brennan", "Bria", "Bryce", "Caleb", "Cameron", "Carla", "Cedric", "Chase", "Claire", "Clayton", "Conner",
+        "Daniel", "David", "Delilah", "Destiny", "Dominic", "Eliana", "Elliot", "Elodie", "Emery", "Eric", "Erica",
+        "Evelyn", "Fiona", "Flora", "Freddie", "Gemma", "Gianna", "Grant", "Grayson", "Hazel", "Irene", "Joanna", "Jordyn",
+        "Julian", "Kara", "Kasey", "Kendall", "Kimberly", "Lachlan", "Lana", "Lincoln", "Lola", "Maya", "Mia", "Milo",
+        "Morgan", "Nadia", "Naomi", "Nico", "Ophelia", "Owen", "Parker", "Phoenix", "Priscilla", "River", "Rose", "Ruby",
+        "Salvatore", "Samantha", "Santiago", "Sawyer", "Scarlett", "Seth", "Silas", "Sofia", "Solomon", "Talia", "Tiana",
+        "Ulysses", "Vivian", "Wyatt", "Zara", "Zoe"
+    };
 
     // New productivity field
     public float productivity;
@@ -86,18 +107,16 @@ public class Character : MonoBehaviour
     {
         isDead = true;
         audioSource.PlayOneShot(deathSound);
-        StartCoroutine(DisappearAfterSound());
+        StartCoroutine(DestroyAfterSound());
 
-        if (shelter != null)
-        {
-            shelter.RemoveResident(gameObject);
-        }
+        // Call OnCharacterDestroyed to update shelter capacity
+        OnCharacterDestroyed(gameObject);
     }
 
-    IEnumerator DisappearAfterSound()
+    IEnumerator DestroyAfterSound()
     {
         yield return new WaitForSeconds(deathSound.length);
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 
     public void TryToEat()
@@ -189,5 +208,14 @@ public class Character : MonoBehaviour
     public float GetProductivity()
     {
         return productivity;
+    }
+
+    void OnCharacterDestroyed(GameObject character)
+    {
+        if (shelter != null) // Assuming you have a reference to the Shelter script
+        {
+            shelter.RemoveResident(character);
+            shelter.RefreshCurrentCapacity(); // Update capacity after removal
+        }
     }
 }

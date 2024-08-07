@@ -323,9 +323,51 @@ MonoBehaviour:
   navMeshSurface: {fileID: 2057639511}
   toggleBuildMenuButton: {fileID: 6888991193385881112}
   navMeshBakeDelay: 1
-  slideDuration: 0.5
+  slideDuration: 1
   slideInOffset: {x: 0, y: 180}
   slideOutOffset: {x: 0, y: 0}
+  bounceCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.21146312
+      value: 0.5202783
+      inSlope: 0.51271355
+      outSlope: 0.51271355
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.41860193
+    - serializedVersion: 3
+      time: 0.6674284
+      value: 0.7797188
+      inSlope: -3.9575517
+      outSlope: -3.9575517
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.1308952
+    - serializedVersion: 3
+      time: 0.8239746
+      value: 0.9893265
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!4 &130311755
 Transform:
   m_ObjectHideFlags: 0
@@ -7430,8 +7472,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1461268374939344a659e2979125e9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentCapacity: 2
+  currentCapacity: 0
   maxCapacity: 4
+  characterTag: Player
 --- !u!4 &1616415772
 Transform:
   m_ObjectHideFlags: 0
@@ -7518,6 +7561,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 537786309}
   resumeButton: {fileID: 215034601}
+  fadeDuration: 1
 --- !u!114 &1628473578
 MonoBehaviour:
   m_ObjectHideFlags: 0
