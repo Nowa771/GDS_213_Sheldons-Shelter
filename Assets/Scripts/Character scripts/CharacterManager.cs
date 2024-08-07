@@ -63,4 +63,21 @@ public class CharacterManager : MonoBehaviour
         int nextIndex = (currentIndex + 1) % characters.Count;
         SelectCharacter(nextIndex);
     }
+
+    public void RemoveCharacter(Character character)
+    {
+        if (characters.Contains(character))
+        {
+            characters.Remove(character);
+            if (characters.Count > 0)
+            {
+                SelectCharacter(currentIndex); // Select a new character if available
+            }
+            else
+            {
+                // If no characters are left, you might want to clear the display or handle it
+                // characterInfoDisplay.Clear(); // Uncomment this line if you implement Clear method
+            }
+        }
+    }
 }

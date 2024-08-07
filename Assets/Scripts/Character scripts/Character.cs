@@ -26,6 +26,7 @@ public class Character : MonoBehaviour
 
     private World world;
     private Shelter shelter;
+    private CharacterManager characterManager; // Reference to CharacterManager
 
     private string[] possibleNames = new string[]
     {
@@ -62,6 +63,7 @@ public class Character : MonoBehaviour
         characterName = GenerateRandomName();
         world = FindObjectOfType<World>();
         shelter = FindObjectOfType<Shelter>();
+        characterManager = FindObjectOfType<CharacterManager>(); // Get reference to CharacterManager
         hunger = maxHunger;
         thirst = maxThirst;
         health = maxHealth;
@@ -216,6 +218,15 @@ public class Character : MonoBehaviour
         {
             shelter.RemoveResident(character);
             shelter.RefreshCurrentCapacity(); // Update capacity after removal
+        }
+
+        if (characterManager != null) // Notify CharacterManager about the removal
+        {
+            Character characterComponent = character.GetComponent<Character>();
+            if (characterComponent != null)
+            {
+                characterManager.RemoveCharacter(characterComponent);
+            }
         }
     }
 }
